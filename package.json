@@ -1,0 +1,13 @@
+{
+  "devDependencies": {
+    "@nolebase/ui": "^2.18.2",
+    "@nolebase/vitepress-plugin-breadcrumbs": "^2.18.2",
+    "@nolebase/vitepress-plugin-enhanced-readabilities": "^2.18.2",
+    "vitepress": "^1.6.4"
+  },
+  "scripts": {
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
+  }
+}
