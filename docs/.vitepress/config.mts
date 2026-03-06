@@ -1,319 +1,324 @@
-import { defineConfig } from 'vitepress'
+import { defineConfig } from "vitepress";
 
-const BASE = '/sjmcl/'
-const FAVICON_URL = `${BASE}logo.png`
+const BASE = "/sjmcl/";
+const FAVICON_URL = `${BASE}logo.png`;
 const API_PROXY = {
-  '/api-sjmcl': {
-    target: 'https://mc.sjtu.cn',
-    changeOrigin: true
-  }
-} as const
+  "/api-sjmcl": {
+    target: "https://mc.sjtu.cn",
+    changeOrigin: true,
+  },
+} as const;
 const localSearch = {
-  provider: 'local',
+  provider: "local",
   options: {
     translations: {
       button: {
-        buttonText: '搜索',
-        buttonAriaLabel: '搜索'
+        buttonText: "搜索",
+        buttonAriaLabel: "搜索",
       },
       modal: {
-        resetButtonTitle: '清除查询条件',
-        backButtonTitle: '关闭搜索',
-        noResultsText: '未找到相关结果',
-        displayDetails: '显示详细列表',
+        resetButtonTitle: "清除查询条件",
+        backButtonTitle: "关闭搜索",
+        noResultsText: "未找到相关结果",
+        displayDetails: "显示详细列表",
         footer: {
-          selectText: '选择',
-          selectKeyAriaLabel: '回车键',
-          navigateText: '切换',
-          navigateUpKeyAriaLabel: '向上方向键',
-          navigateDownKeyAriaLabel: '向下方向键',
-          closeText: '关闭',
-          closeKeyAriaLabel: 'Esc 键'
-        }
-      }
+          selectText: "选择",
+          selectKeyAriaLabel: "回车键",
+          navigateText: "切换",
+          navigateUpKeyAriaLabel: "向上方向键",
+          navigateDownKeyAriaLabel: "向下方向键",
+          closeText: "关闭",
+          closeKeyAriaLabel: "Esc 键",
+        },
+      },
     },
     locales: {
       en: {
         translations: {
           button: {
-            buttonText: 'Search',
-            buttonAriaLabel: 'Search'
+            buttonText: "Search",
+            buttonAriaLabel: "Search",
           },
           modal: {
-            resetButtonTitle: 'Clear query',
-            backButtonTitle: 'Close search',
-            noResultsText: 'No results found',
-            displayDetails: 'Display detailed list',
+            resetButtonTitle: "Clear query",
+            backButtonTitle: "Close search",
+            noResultsText: "No results found",
+            displayDetails: "Display detailed list",
             footer: {
-              selectText: 'Select',
-              selectKeyAriaLabel: 'Enter key',
-              navigateText: 'Navigate',
-              navigateUpKeyAriaLabel: 'Arrow up',
-              navigateDownKeyAriaLabel: 'Arrow down',
-              closeText: 'Close',
-              closeKeyAriaLabel: 'Escape key'
-            }
-          }
-        }
-      }
-    }
-  }
-} as const
+              selectText: "Select",
+              selectKeyAriaLabel: "Enter key",
+              navigateText: "Navigate",
+              navigateUpKeyAriaLabel: "Arrow up",
+              navigateDownKeyAriaLabel: "Arrow down",
+              closeText: "Close",
+              closeKeyAriaLabel: "Escape key",
+            },
+          },
+        },
+      },
+    },
+  },
+} as const;
 
 function createBreadcrumbs(relativePath: string, title: string) {
-  const normalized = relativePath.replace(/(^\/|\/$)/g, '')
-  const segments = normalized.split('/').filter(Boolean)
-  const contentSegments = segments[0] === 'en' ? segments.slice(1) : segments
+  const normalized = relativePath.replace(/(^\/|\/$)/g, "");
+  const segments = normalized.split("/").filter(Boolean);
+  const contentSegments = segments[0] === "en" ? segments.slice(1) : segments;
 
-  if (!segments.length || normalized === 'index.md')
-    return []
+  if (!segments.length || normalized === "index.md") return [];
 
-  if (contentSegments[0] === 'blog')
-    return []
+  if (contentSegments[0] === "blog") return [];
 
-  const isEnglish = segments[0] === 'en'
+  const isEnglish = segments[0] === "en";
   const labels: Record<string, string> = isEnglish
     ? {
-        docs: 'Docs',
-        intelligence: 'Intelligence',
-        dev: 'Developers',
-        blog: 'Blog',
-        about: 'About'
+        docs: "Docs",
+        intelligence: "Intelligence",
+        dev: "Developers",
+        blog: "Blog",
+        about: "About",
       }
     : {
-        docs: '文档',
-        intelligence: '智能',
-        dev: '开发者',
-        blog: '博客',
-        about: '关于'
-      }
+        docs: "文档",
+        intelligence: "智能",
+        dev: "开发者",
+        blog: "博客",
+        about: "关于",
+      };
 
-  const breadcrumbs: { title: string; link: string }[] = []
+  const breadcrumbs: { title: string; link: string }[] = [];
 
   for (let i = isEnglish ? 1 : 0; i < segments.length; i++) {
-    const segment = segments[i]
+    const segment = segments[i];
 
-    if (segment === 'index.md')
-      continue
+    if (segment === "index.md") continue;
 
-    const isLast = i === segments.length - 1
-    const breadcrumbTitle = isLast ? title : (labels[segment] || segment)
-    const partial = segments.slice(0, i + 1).join('/')
+    const isLast = i === segments.length - 1;
+    const breadcrumbTitle = isLast ? title : labels[segment] || segment;
+    const partial = segments.slice(0, i + 1).join("/");
     const link = isLast
-      ? `/${partial.replace(/\.md$/, '')}`
-      : `/${partial.replace(/\/index\.md$/, '/').replace(/index\.md$/, '')}`
+      ? `/${partial.replace(/\.md$/, "")}`
+      : `/${partial.replace(/\/index\.md$/, "/").replace(/index\.md$/, "")}`;
 
     breadcrumbs.push({
       title: breadcrumbTitle,
-      link: isLast ? link : (link.endsWith('/') ? link : `${link}/`)
-    })
+      link: isLast ? link : link.endsWith("/") ? link : `${link}/`,
+    });
   }
 
-  if (breadcrumbs.length > 1)
-    breadcrumbs[breadcrumbs.length - 1].link = ''
+  if (breadcrumbs.length > 1) breadcrumbs[breadcrumbs.length - 1].link = "";
 
-  return breadcrumbs
+  return breadcrumbs;
 }
 
 const sharedThemeConfig = {
-  logo: '/logo.png',
+  logo: "/logo.png",
   siteTitle: false,
-  socialLinks: [
-    { icon: 'github', link: 'https://github.com/UNIkeEN/SJMCL' }
-  ],
-  search: localSearch
-} as const
+  socialLinks: [{ icon: "github", link: "https://github.com/UNIkeEN/SJMCL" }],
+  search: localSearch,
+} as const;
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
-  title: 'SJMC Launcher',
-  description: 'Docs for the SJMC Launcher',
+  title: "SJMC Launcher",
+  description: "Docs for the SJMC Launcher",
   base: BASE,
   themeConfig: {
-    search: localSearch
+    search: localSearch,
   },
   head: [
-    ['link', { rel: 'icon', type: 'image/png', href: FAVICON_URL }],
-    ['link', { rel: 'apple-touch-icon', href: FAVICON_URL }]
+    ["link", { rel: "icon", type: "image/png", href: FAVICON_URL }],
+    ["link", { rel: "apple-touch-icon", href: FAVICON_URL }],
   ],
   lastUpdated: true,
-  rewrites: (id) => id.startsWith('zh-Hans/') ? id.slice('zh-Hans/'.length) : id,
+  rewrites: (id) =>
+    id.startsWith("zh-Hans/") ? id.slice("zh-Hans/".length) : id,
   vite: {
     server: {
-      proxy: API_PROXY
+      proxy: API_PROXY,
     },
     preview: {
-      proxy: API_PROXY
+      proxy: API_PROXY,
     },
     optimizeDeps: {
       exclude: [
-        '@nolebase/vitepress-plugin-breadcrumbs/client',
-        '@nolebase/vitepress-plugin-enhanced-readabilities/client',
-        'vitepress',
-        '@nolebase/ui'
-      ]
+        "@nolebase/vitepress-plugin-breadcrumbs/client",
+        "@nolebase/vitepress-plugin-enhanced-readabilities/client",
+        "vitepress",
+        "@nolebase/ui",
+      ],
     },
     ssr: {
       noExternal: [
-        '@nolebase/vitepress-plugin-breadcrumbs',
-        '@nolebase/vitepress-plugin-enhanced-readabilities',
-        '@nolebase/ui'
-      ]
-    }
+        "@nolebase/vitepress-plugin-breadcrumbs",
+        "@nolebase/vitepress-plugin-enhanced-readabilities",
+        "@nolebase/ui",
+      ],
+    },
   },
   locales: {
     root: {
-      label: '简体中文',
-      lang: 'zh-CN',
+      label: "简体中文",
+      lang: "zh-CN",
       themeConfig: {
         ...sharedThemeConfig,
         nav: [
-          { text: '下载', link: '/downloads/' },
-          { text: '文档', link: '/docs/' },
-          { text: '开发者', link: '/dev/' },
-          { text: '博客', link: '/blog/' },
-          { text: '关于', link: '/about/' }
+          { text: "下载", link: "/downloads/" },
+          { text: "文档", link: "/docs/" },
+          { text: "开发者", link: "/dev/" },
+          { text: "博客", link: "/blog/" },
+          { text: "关于", link: "/about/" },
         ],
         sidebar: {
-          '/docs/': [
+          "/docs/": [
             {
-              text: '快速开始',
+              text: "快速开始",
               collapsed: false,
-              items: [
-                { text: '简介', link: '/docs/' }
-              ]
+              items: [{ text: "简介", link: "/docs/" }],
             },
             {
-              text: '智能',
+              text: "智能",
               collapsed: false,
               items: [
-                { text: '启动器 MCP 服务', link: '/docs/intelligence/launcher-mcp' }
-              ]
+                {
+                  text: "启动器 MCP 服务",
+                  link: "/docs/intelligence/launcher-mcp",
+                },
+              ],
             },
-            { text: '更新日志', link: '/docs/changelog' },
-            { text: '用户协议', link: '/docs/tos' }
+            { text: "更新日志", link: "/docs/changelog" },
+            { text: "用户协议", link: "/docs/tos" },
           ],
-          '/dev/': [
+          "/dev/": [
             {
-              text: '开发者',
+              text: "开发者",
               items: [
-                { text: '概览', link: '/dev/' },
-                { text: '基础工作流', link: '/dev/guide' },
-                { text: '开源协议', link: '/dev/license' }
-              ]
-            }
+                { text: "概览", link: "/dev/" },
+                { text: "基础工作流", link: "/dev/guide" },
+                { text: "开源协议", link: "/dev/license" },
+              ],
+            },
           ],
-          '/about/': [
+          "/about/": [
             {
-              text: '关于',
+              text: "关于",
               items: [
-                { text: '关于我们', link: '/about/' }
-              ]
-            }
-          ]
+                { text: "关于我们", link: "/about/" },
+                { text: "社区支持", link: "/about/community-support/" },
+              ],
+            },
+          ],
         },
         docFooter: {
-          prev: '上一页',
-          next: '下一页'
+          prev: "上一页",
+          next: "下一页",
         },
         outline: {
-          label: '页面导航'
+          label: "页面导航",
         },
         lastUpdated: {
-          text: '最后更新于',
+          text: "最后更新于",
           formatOptions: {
-            dateStyle: 'short',
-            timeStyle: 'medium'
-          }
+            dateStyle: "short",
+            timeStyle: "medium",
+          },
         },
-        langMenuLabel: '多语言',
-        returnToTopLabel: '回到顶部',
-        sidebarMenuLabel: '菜单',
-        darkModeSwitchLabel: '主题',
-        lightModeSwitchTitle: '切换到浅色模式',
-        darkModeSwitchTitle: '切换到深色模式'
-      }
+        langMenuLabel: "多语言",
+        returnToTopLabel: "回到顶部",
+        sidebarMenuLabel: "菜单",
+        darkModeSwitchLabel: "主题",
+        lightModeSwitchTitle: "切换到浅色模式",
+        darkModeSwitchTitle: "切换到深色模式",
+      },
     },
     en: {
-      label: 'English',
-      lang: 'en-US',
-      link: '/en/',
+      label: "English",
+      lang: "en-US",
+      link: "/en/",
       themeConfig: {
         ...sharedThemeConfig,
         nav: [
-          { text: 'Downloads', link: '/en/downloads/' },
-          { text: 'Docs', link: '/en/docs/' },
-          { text: 'Developers', link: '/en/dev/' },
-          { text: 'Blog', link: '/en/blog/' },
-          { text: 'About', link: '/en/about/' }
+          { text: "Downloads", link: "/en/downloads/" },
+          { text: "Docs", link: "/en/docs/" },
+          { text: "Developers", link: "/en/dev/" },
+          { text: "Blog", link: "/en/blog/" },
+          { text: "About", link: "/en/about/" },
         ],
         sidebar: {
-          '/en/docs/': [
+          "/en/docs/": [
             {
-              text: 'Getting Started',
+              text: "Getting Started",
               collapsed: false,
-              items: [
-                { text: 'Introduction', link: '/en/docs/' }
-              ]
+              items: [{ text: "Introduction", link: "/en/docs/" }],
             },
             {
-              text: 'Intelligence',
+              text: "Intelligence",
               collapsed: false,
               items: [
-                { text: 'Launcher MCP Service', link: '/en/docs/intelligence/launcher-mcp' }
-              ]
+                {
+                  text: "Launcher MCP Service",
+                  link: "/en/docs/intelligence/launcher-mcp",
+                },
+              ],
             },
             {
-              text: 'Docs',
+              text: "Docs",
               items: [
-                { text: 'Changelog', link: '/en/docs/changelog' },
-                { text: 'Terms of Service', link: '/en/docs/tos' }
-              ]
-            }
+                { text: "Changelog", link: "/en/docs/changelog" },
+                { text: "Terms of Service", link: "/en/docs/tos" },
+              ],
+            },
           ],
-          '/en/dev/': [
+          "/en/dev/": [
             {
-              text: 'Developers',
+              text: "Developers",
               items: [
-                { text: 'Overview', link: '/en/dev/' },
-                { text: 'Basic Workflow', link: '/en/dev/guide' },
-                { text: 'License', link: '/en/dev/license' }
-              ]
-            }
+                { text: "Overview", link: "/en/dev/" },
+                { text: "Basic Workflow", link: "/en/dev/guide" },
+                { text: "License", link: "/en/dev/license" },
+              ],
+            },
           ],
-          '/en/about/': [
+          "/en/about/": [
             {
-              text: 'About',
+              text: "About",
               items: [
-                { text: 'About Us', link: '/en/about/' }
-              ]
-            }
-          ]
+                { text: "About Us", link: "/en/about/" },
+                {
+                  text: "Community Support",
+                  link: "/en/about/community-support/",
+                },
+              ],
+            },
+          ],
         },
         docFooter: {
-          prev: 'Previous page',
-          next: 'Next page'
+          prev: "Previous page",
+          next: "Next page",
         },
         outline: {
-          label: 'On this page'
+          label: "On this page",
         },
         lastUpdated: {
-          text: 'Last updated',
+          text: "Last updated",
           formatOptions: {
-            dateStyle: 'short',
-            timeStyle: 'medium'
-          }
+            dateStyle: "short",
+            timeStyle: "medium",
+          },
         },
-        langMenuLabel: 'Languages',
-        returnToTopLabel: 'Back to top',
-        sidebarMenuLabel: 'Menu',
-        darkModeSwitchLabel: 'Appearance',
-        lightModeSwitchTitle: 'Switch to light theme',
-        darkModeSwitchTitle: 'Switch to dark theme'
-      }
-    }
+        langMenuLabel: "Languages",
+        returnToTopLabel: "Back to top",
+        sidebarMenuLabel: "Menu",
+        darkModeSwitchLabel: "Appearance",
+        lightModeSwitchTitle: "Switch to light theme",
+        darkModeSwitchTitle: "Switch to dark theme",
+      },
+    },
   },
   transformPageData(pageData) {
-    pageData.frontmatter.breadcrumbs = createBreadcrumbs(pageData.relativePath, pageData.title)
-  }
-})
+    pageData.frontmatter.breadcrumbs = createBreadcrumbs(
+      pageData.relativePath,
+      pageData.title,
+    );
+  },
+});
