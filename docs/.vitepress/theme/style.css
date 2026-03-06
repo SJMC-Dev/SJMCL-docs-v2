@@ -238,3 +238,17 @@ body {
   max-width: none;
   text-align: center;
 }
+
+/* Keep doc aside from overlapping custom layout-bottom footer. */
+@media (min-width: 1280px) {
+  .VPDoc .aside-container {
+    position: sticky;
+    top: calc(var(--vp-nav-height) + var(--vp-layout-top-height, 0px) + 16px);
+    padding-top: 0;
+    height: calc(100vh - (var(--vp-nav-height) + var(--vp-layout-top-height, 0px) + 16px));
+  }
+
+  .VPDoc .aside-curtain {
+    display: none;
+  }
+}
