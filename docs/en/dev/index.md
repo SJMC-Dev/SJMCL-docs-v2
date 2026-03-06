@@ -4,4 +4,5 @@ This section contains developer documentation related to SJMCL development, redi
 
 ## Current Content
 
+- [Basic Workflow](/en/dev/guide)
 - [License](/en/dev/license)

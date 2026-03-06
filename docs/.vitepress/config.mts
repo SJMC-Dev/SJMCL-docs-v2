@@ -198,6 +198,7 @@ export default defineConfig({
               text: '开发者',
               items: [
                 { text: '概览', link: '/dev/' },
+                { text: '基础工作流', link: '/dev/guide' },
                 { text: '开源协议', link: '/dev/license' }
               ]
             }
@@ -275,6 +276,7 @@ export default defineConfig({
               text: 'Developers',
               items: [
                 { text: 'Overview', link: '/en/dev/' },
+                { text: 'Basic Workflow', link: '/en/dev/guide' },
                 { text: 'License', link: '/en/dev/license' }
               ]
             }
