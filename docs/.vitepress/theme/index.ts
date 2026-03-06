@@ -13,6 +13,7 @@ import Breadcrumbs from './Breadcrumbs.vue'
 import Confetti from './Confetti.vue'
 import DownloadsPage from './DownloadsPage.vue'
 import HeroBackground from './Layout.vue'
+import HomeHeroImage from './HomeHeroImage.vue'
 import NavTitle from './NavTitle.vue'
 import SiteFooter from './SiteFooter.vue'
 import './style.css'
@@ -25,6 +26,7 @@ const theme: Theme = {
 
     return h(DefaultTheme.Layout, null, {
       'home-hero-before': () => [h(HeroBackground), !isDownloadsPage.value ? h(Confetti) : null],
+      'home-hero-image': () => h(HomeHeroImage),
       ...(isDownloadsPage.value
         ? {
             'home-hero-info': () => h(DownloadsPage, { section: 'hero' }),

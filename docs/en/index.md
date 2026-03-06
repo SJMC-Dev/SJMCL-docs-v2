@@ -23,10 +23,6 @@ hero:
     - theme: alt
       text: GitHub
       link: https://github.com/UNIkeEN/SJMCL
-  image:
-    src: /logo.png
-    alt: SJMC Launcher
-
 features:
   - icon: 🪟
     title: Cross Platform
