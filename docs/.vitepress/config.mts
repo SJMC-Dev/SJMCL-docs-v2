@@ -161,6 +161,7 @@ export default defineConfig({
               text: '文档',
               items: [
                 { text: '简介', link: '/docs/' },
+                { text: '更新日志', link: '/docs/changelog' },
                 { text: '用户协议', link: '/docs/tos' }
               ]
             }
@@ -231,6 +232,7 @@ export default defineConfig({
               text: 'Docs',
               items: [
                 { text: 'Introduction', link: '/en/docs/' },
+                { text: 'Changelog', link: '/en/docs/changelog' },
                 { text: 'Terms of Service', link: '/en/docs/tos' }
               ]
             }
