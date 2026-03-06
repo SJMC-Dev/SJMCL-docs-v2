@@ -164,6 +164,7 @@ export default defineConfig({
       themeConfig: {
         ...sharedThemeConfig,
         nav: [
+          { text: '下载', link: '/downloads/' },
           { text: '文档', link: '/docs/' },
           { text: '开发者', link: '/dev/' },
           { text: '博客', link: '/blog/' },
@@ -235,6 +236,7 @@ export default defineConfig({
       themeConfig: {
         ...sharedThemeConfig,
         nav: [
+          { text: 'Downloads', link: '/en/downloads/' },
           { text: 'Docs', link: '/en/docs/' },
           { text: 'Developers', link: '/en/dev/' },
           { text: 'Blog', link: '/en/blog/' },

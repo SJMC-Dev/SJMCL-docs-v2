@@ -33,6 +33,7 @@ const props = defineProps<{
 
 const API_URL = 'https://mc.sjtu.cn/api-sjmcl/releases/latest'
 const DOWNLOAD_BASE_URL = 'https://mc.sjtu.cn/sjmcl/releases/'
+const GITHUB_RELEASES_URL = 'https://github.com/UNIkeEN/SJMCL/releases'
 
 const { frontmatter, lang } = useData()
 const sharedRelease = ref<ReleaseResponse | null>(null)
@@ -77,7 +78,8 @@ const messages = computed(() => {
       x86: 'x86',
       intel: 'Intel',
       appleSilicon: 'Apple Silicon',
-      downloadLabel: 'Download'
+      downloadLabel: 'Download',
+      historyLinkText: 'View historical versions on GitHub Releases'
     }
   }
 
@@ -105,7 +107,8 @@ const messages = computed(() => {
     x86: 'x86',
     intel: 'Intel',
     appleSilicon: 'Apple Silicon',
-    downloadLabel: '下载'
+    downloadLabel: '下载',
+    historyLinkText: '在 GitHub Releases 查看历史版本'
   }
 })
 
@@ -265,8 +268,9 @@ async function ensureReleaseLoaded() {
 }
 
 function detectAutoDownload(files: ReleaseFile[]) {
-  const fallbackFile = files.find((file) => file.name.includes('windows_x86_64_setup.exe'))
-    || files.find((file) => file.name.includes('windows_x86_64_portable.exe'))
+  const fallbackFile = files.find((file) => file.name.includes('windows_x86_64_portable.exe'))
+    || files.find((file) => file.name.includes('windows_x86_64_setup.exe'))
+    || files.find((file) => file.name.includes('linux_x86_64.portable'))
     || files[0]
 
   if (typeof navigator === 'undefined')
@@ -288,27 +292,31 @@ function detectAutoDownload(files: ReleaseFile[]) {
 
   if (source.includes('linux')) {
     return files.find((file) => isArm
-      ? file.name.includes('linux_aarch64.AppImage')
-      : file.name.includes('linux_x86_64.AppImage'))
+      ? file.name.includes('linux_aarch64.portable')
+      : file.name.includes('linux_x86_64.portable'))
+      || files.find((file) => isArm
+        ? file.name.includes('linux_aarch64.AppImage')
+        : file.name.includes('linux_x86_64.AppImage'))
+      || files.find((file) => file.name.includes('linux_') && file.name.includes('.portable'))
       || files.find((file) => file.name.includes('linux_') && file.name.endsWith('.AppImage'))
       || fallbackFile
   }
 
   if (source.includes('win')) {
     if (isArm) {
-      return files.find((file) => file.name.includes('windows_aarch64_setup.exe'))
-        || files.find((file) => file.name.includes('windows_aarch64_portable.exe'))
+      return files.find((file) => file.name.includes('windows_aarch64_portable.exe'))
+        || files.find((file) => file.name.includes('windows_aarch64_setup.exe'))
         || fallbackFile
     }
 
     const is32Bit = source.includes('i686') || source.includes('x86') || source.includes('win32')
 
     return files.find((file) => is32Bit
-      ? file.name.includes('windows_i686_setup.exe')
-      : file.name.includes('windows_x86_64_setup.exe'))
+      ? file.name.includes('windows_i686_portable.exe')
+      : file.name.includes('windows_x86_64_portable.exe'))
       || files.find((file) => is32Bit
-        ? file.name.includes('windows_i686_portable.exe')
-        : file.name.includes('windows_x86_64_portable.exe'))
+        ? file.name.includes('windows_i686_setup.exe')
+        : file.name.includes('windows_x86_64_setup.exe'))
       || fallbackFile
   }
 
@@ -441,6 +449,16 @@ onServerPrefetch(async () => {
         </div>
       </article>
     </div>
+    <p class="downloads-history-link-wrap">
+      <a
+        class="downloads-history-link"
+        :href="GITHUB_RELEASES_URL"
+        target="_blank"
+        rel="noreferrer"
+      >
+        {{ messages.historyLinkText }}
+      </a>
+    </p>
   </section>
 </template>
 
@@ -487,6 +505,22 @@ onServerPrefetch(async () => {
   gap: 20px;
   margin: 0 auto;
   max-width: 1152px;
+}
+
+.downloads-history-link-wrap {
+  margin: 48px 0 0;
+  text-align: center;
+}
+
+.downloads-history-link {
+  font-size: 13px;
+  color: var(--vp-c-text-2);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.downloads-history-link:hover {
+  color: var(--vp-c-brand-1);
 }
 
 .downloads-feature {
