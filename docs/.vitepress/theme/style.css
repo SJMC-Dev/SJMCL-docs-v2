@@ -15,6 +15,31 @@
   --vp-font-family-mono: "SFMono-Regular", "JetBrains Mono", "Menlo", monospace;
 }
 
+/* Keep a persistent right-side scrollbar across pages to avoid layout shift. */
+html {
+  overflow-y: scroll;
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(49, 130, 206, 0.75) rgba(15, 23, 42, 0.08);
+}
+
+html::-webkit-scrollbar {
+  width: 10px;
+}
+
+html::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.08);
+}
+
+html::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #2b6cb0 0%, #3182ce 100%);
+  border-radius: 999px;
+}
+
+html::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #2c5282 0%, #2b6cb0 100%);
+}
+
 .dark {
   --vp-c-brand-1: #7cc0ff;
   --vp-c-brand-2: #4f9cf7;
@@ -25,6 +50,22 @@
     radial-gradient(circle at 30% 20%, rgba(83, 153, 255, 0.32), transparent 42%),
     radial-gradient(circle at 70% 30%, rgba(112, 82, 255, 0.24), transparent 34%),
     linear-gradient(145deg, rgba(26, 30, 44, 0.82), rgba(12, 16, 28, 0.46));
+}
+
+.dark html {
+  scrollbar-color: rgba(124, 192, 255, 0.78) rgba(148, 163, 184, 0.18);
+}
+
+.dark html::-webkit-scrollbar-track {
+  background: rgba(148, 163, 184, 0.18);
+}
+
+.dark html::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #7cc0ff 0%, #4f9cf7 100%);
+}
+
+.dark html::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #93cfff 0%, #69aeff 100%);
 }
 
 body {
