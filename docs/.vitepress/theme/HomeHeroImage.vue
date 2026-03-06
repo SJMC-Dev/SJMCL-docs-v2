@@ -1,8 +1,14 @@
 <script setup lang="ts">
-import { withBase } from 'vitepress'
+import { computed } from 'vue'
+import { useData, withBase } from 'vitepress'
 
-const screenshotUrl = withBase('/images/screenshot.png')
-const stickerUrl = withBase('/images/miuxi-emoji.png')
+const { isDark } = useData()
+
+const screenshotLightUrl = withBase('/images/home-banner-screenshot.png')
+const screenshotDarkUrl = withBase('/images/home-banner-screenshot-dark.png')
+const stickerUrl = withBase('/images/home-banner-miuxi-emoji.png')
+
+const screenshotUrl = computed(() => isDark.value ? screenshotDarkUrl : screenshotLightUrl)
 </script>
 
 <template>
@@ -31,7 +37,7 @@ const stickerUrl = withBase('/images/miuxi-emoji.png')
 .sjmcl-home-hero-image__screenshot {
   display: block;
   width: 100%;
-  border-radius: 14px;
+  border-radius: 6px;
   box-shadow: 0 20px 48px rgb(15 23 42 / 26%);
 }
 
