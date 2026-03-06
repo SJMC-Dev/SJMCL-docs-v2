@@ -1,9 +1,7 @@
 # Developers
 
-This section collects notes for redistribution, secondary development and licensing around SJMCL.
+This section contains developer documentation related to SJMCL development, redistribution, and licensing.
 
-## Available pages
+## Current Content
 
 - [License](/en/dev/license)
-
-If needed, the full legacy developer documentation structure can be migrated into this VitePress site incrementally.

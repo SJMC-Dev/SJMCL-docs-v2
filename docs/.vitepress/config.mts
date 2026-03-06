@@ -69,12 +69,14 @@ function createBreadcrumbs(relativePath: string, title: string) {
   const labels: Record<string, string> = isEnglish
     ? {
         docs: 'Docs',
+        intelligence: 'Intelligence',
         dev: 'Developers',
         blog: 'Blog',
         about: 'About'
       }
     : {
         docs: '文档',
+        intelligence: '智能',
         dev: '开发者',
         blog: '博客',
         about: '关于'
@@ -170,13 +172,21 @@ export default defineConfig({
         sidebar: {
           '/docs/': [
             {
-              text: '文档',
+              text: '快速开始',
+              collapsed: false,
               items: [
-                { text: '简介', link: '/docs/' },
-                { text: '更新日志', link: '/docs/changelog' },
-                { text: '用户协议', link: '/docs/tos' }
+                { text: '简介', link: '/docs/' }
               ]
-            }
+            },
+            {
+              text: '智能',
+              collapsed: false,
+              items: [
+                { text: '启动器 MCP 服务', link: '/docs/intelligence/launcher-mcp' }
+              ]
+            },
+            { text: '更新日志', link: '/docs/changelog' },
+            { text: '用户协议', link: '/docs/tos' }
           ],
           '/dev/': [
             {
@@ -233,9 +243,22 @@ export default defineConfig({
         sidebar: {
           '/en/docs/': [
             {
+              text: 'Getting Started',
+              collapsed: false,
+              items: [
+                { text: 'Introduction', link: '/en/docs/' }
+              ]
+            },
+            {
+              text: 'Intelligence',
+              collapsed: false,
+              items: [
+                { text: 'Launcher MCP Service', link: '/en/docs/intelligence/launcher-mcp' }
+              ]
+            },
+            {
               text: 'Docs',
               items: [
-                { text: 'Introduction', link: '/en/docs/' },
                 { text: 'Changelog', link: '/en/docs/changelog' },
                 { text: 'Terms of Service', link: '/en/docs/tos' }
               ]
