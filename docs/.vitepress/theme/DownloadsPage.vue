@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, onServerPrefetch, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import { useData } from 'vitepress'
 import { VPButton } from 'vitepress/theme'
 import { icons as simpleIcons } from '@iconify-json/simple-icons'
@@ -248,7 +248,7 @@ async function ensureReleaseLoaded() {
     })
       .then(async (response) => {
         if (!response.ok)
-          throw new Error(`Unexpected response: ${response.status}`)
+          throw new Error(`Unexpected response: ${response.status} ${response.statusText}`)
 
         const data = await response.json() as ReleaseResponse
         sharedRelease.value = {
@@ -256,8 +256,15 @@ async function ensureReleaseLoaded() {
           files: data.files || []
         }
       })
-      .catch(() => {
+      .catch((error) => {
         sharedLoadFailed.value = true
+        if (typeof window !== 'undefined') {
+          console.error('[DownloadsPage] Failed to load latest release', {
+            requestUrl,
+            pageUrl: window.location.href,
+            error
+          })
+        }
       })
       .finally(() => {
         sharedLoadPromise = null
@@ -375,10 +382,6 @@ const cards = computed<CardData[]>(() => {
 
 onMounted(() => {
   void ensureReleaseLoaded()
-})
-
-onServerPrefetch(async () => {
-  await ensureReleaseLoaded()
 })
 </script>
 

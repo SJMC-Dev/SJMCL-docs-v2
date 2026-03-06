@@ -2,6 +2,12 @@ import { defineConfig } from 'vitepress'
 
 const BASE = '/sjmcl/'
 const FAVICON_URL = `${BASE}logo.png`
+const API_PROXY = {
+  '/api-sjmcl': {
+    target: 'https://mc.sjtu.cn',
+    changeOrigin: true
+  }
+} as const
 const localSearch = {
   provider: 'local',
   options: {
@@ -134,12 +140,10 @@ export default defineConfig({
   rewrites: (id) => id.startsWith('zh-Hans/') ? id.slice('zh-Hans/'.length) : id,
   vite: {
     server: {
-      proxy: {
-        '/api-sjmcl': {
-          target: 'https://mc.sjtu.cn',
-          changeOrigin: true
-        }
-      }
+      proxy: API_PROXY
+    },
+    preview: {
+      proxy: API_PROXY
     },
     optimizeDeps: {
       exclude: [
