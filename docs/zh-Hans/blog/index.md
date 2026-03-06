@@ -1,3 +1,8 @@
+---
+sidebar: false
+outline: false
+---
+
 # 博客
 
 - [社团自研 Minecraft 启动器 SJMC Launcher 正式发布](https://mc.sjtu.cn/2025/09/27/sjmcl-release/)

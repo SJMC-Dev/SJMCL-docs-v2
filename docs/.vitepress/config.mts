@@ -57,8 +57,12 @@ const localSearch = {
 function createBreadcrumbs(relativePath: string, title: string) {
   const normalized = relativePath.replace(/(^\/|\/$)/g, '')
   const segments = normalized.split('/').filter(Boolean)
+  const contentSegments = segments[0] === 'en' ? segments.slice(1) : segments
 
   if (!segments.length || normalized === 'index.md')
+    return []
+
+  if (contentSegments[0] === 'blog')
     return []
 
   const isEnglish = segments[0] === 'en'
@@ -175,14 +179,6 @@ export default defineConfig({
               ]
             }
           ],
-          '/blog/': [
-            {
-              text: '博客',
-              items: [
-                { text: '博客索引', link: '/blog/' }
-              ]
-            }
-          ],
           '/about/': [
             {
               text: '关于',
@@ -243,14 +239,6 @@ export default defineConfig({
               items: [
                 { text: 'Overview', link: '/en/dev/' },
                 { text: 'License', link: '/en/dev/license' }
-              ]
-            }
-          ],
-          '/en/blog/': [
-            {
-              text: 'Blog',
-              items: [
-                { text: 'Blog Index', link: '/en/blog/' }
               ]
             }
           ],
