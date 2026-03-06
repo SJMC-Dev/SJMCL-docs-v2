@@ -199,15 +199,6 @@ export default defineConfig({
               ],
             },
           ],
-          "/about/": [
-            {
-              text: "关于",
-              items: [
-                { text: "关于我们", link: "/about/" },
-                { text: "社区支持", link: "/about/community-support/" },
-              ],
-            },
-          ],
         },
         docFooter: {
           prev: "上一页",
@@ -276,18 +267,6 @@ export default defineConfig({
                 { text: "Overview", link: "/en/dev/" },
                 { text: "Basic Workflow", link: "/en/dev/guide" },
                 { text: "License", link: "/en/dev/license" },
-              ],
-            },
-          ],
-          "/en/about/": [
-            {
-              text: "About",
-              items: [
-                { text: "About Us", link: "/en/about/" },
-                {
-                  text: "Community Support",
-                  link: "/en/about/community-support/",
-                },
               ],
             },
           ],

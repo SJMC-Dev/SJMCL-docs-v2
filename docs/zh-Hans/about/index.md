@@ -1,3 +1,8 @@
+---
+sidebar: false
+outline: false
+---
+
 # 关于我们
 
 SJMC Launcher 是一款基于 Tauri 框架打造的现代化、跨平台 Minecraft 启动器，由上海交通大学 Minecraft 社成员发起，并与开源社区贡献者共同开发维护。
@@ -5,6 +10,14 @@ SJMC Launcher 是一款基于 Tauri 框架打造的现代化、跨平台 Minecra
 感谢所有贡献者们的工作：
 
 ![SJMCL Contributors](https://contrib.rocks/image?repo=UNIkeEN/SJMCL)
+
+## 社区支持
+
+我们衷心感谢以下组织在 SJMCL 项目开发和社区支持过程中所提供的帮助。
+
+- [上海工程技术大学程园我的世界社](https://www.suesmc.ltd/)
+- [Minecraft 高校联盟](https://www.mualliance.cn/)
+- [GNWork 团队](https://space.bilibili.com/403097853)
 
 ## 关于 SJMC
 
