@@ -1,4 +1,7 @@
 {
+  "dependencies": {
+    "canvas-confetti": "^1.9.3"
+  },
   "devDependencies": {
     "@nolebase/ui": "^2.18.2",
     "@nolebase/vitepress-plugin-breadcrumbs": "^2.18.2",

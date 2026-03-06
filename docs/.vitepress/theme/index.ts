@@ -10,6 +10,7 @@ import {
 } from '@nolebase/vitepress-plugin-enhanced-readabilities/client'
 import '@nolebase/vitepress-plugin-enhanced-readabilities/client/style.css'
 import Breadcrumbs from './Breadcrumbs.vue'
+import Confetti from './Confetti.vue'
 import DownloadsPage from './DownloadsPage.vue'
 import HeroBackground from './Layout.vue'
 import NavTitle from './NavTitle.vue'
@@ -23,7 +24,7 @@ const theme: Theme = {
     const isDownloadsPage = computed(() => frontmatter.value.pageClass === 'downloads-page')
 
     return h(DefaultTheme.Layout, null, {
-      'home-hero-before': () => h(HeroBackground),
+      'home-hero-before': () => [h(HeroBackground), !isDownloadsPage.value ? h(Confetti) : null],
       ...(isDownloadsPage.value
         ? {
             'home-hero-info': () => h(DownloadsPage, { section: 'hero' }),
