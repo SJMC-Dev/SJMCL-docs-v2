@@ -9,7 +9,6 @@ hero:
   text: ''
   tagline: |
     Next-generation open-source cross-platform Minecraft launcher
-    developed by the SJTU Minecraft Club
     
   actions:
     - theme: brand
