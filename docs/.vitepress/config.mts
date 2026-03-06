@@ -1,5 +1,8 @@
 import { defineConfig } from 'vitepress'
 
+const BASE = '/sjmcl/'
+const FAVICON_URL = `${BASE}logo.png`
+
 function createBreadcrumbs(relativePath: string, title: string) {
   const normalized = relativePath.replace(/(^\/|\/$)/g, '')
   const segments = normalized.split('/').filter(Boolean)
@@ -64,7 +67,11 @@ const sharedThemeConfig = {
 export default defineConfig({
   title: 'SJMC Launcher',
   description: 'Docs for the SJMC Launcher',
-  base: '/sjmcl/',
+  base: BASE,
+  head: [
+    ['link', { rel: 'icon', type: 'image/png', href: FAVICON_URL }],
+    ['link', { rel: 'apple-touch-icon', href: FAVICON_URL }]
+  ],
   lastUpdated: true,
   rewrites: (id) => id.startsWith('zh-Hans/') ? id.slice('zh-Hans/'.length) : id,
   vite: {

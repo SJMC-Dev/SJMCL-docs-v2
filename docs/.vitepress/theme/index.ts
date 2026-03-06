@@ -11,6 +11,7 @@ import '@nolebase/vitepress-plugin-enhanced-readabilities/client/style.css'
 import Breadcrumbs from './Breadcrumbs.vue'
 import HeroBackground from './Layout.vue'
 import NavTitle from './NavTitle.vue'
+import SiteFooter from './SiteFooter.vue'
 import './style.css'
 
 const theme: Theme = {
@@ -19,6 +20,7 @@ const theme: Theme = {
     return h(DefaultTheme.Layout, null, {
       'home-hero-before': () => h(HeroBackground),
       'doc-before': () => h(Breadcrumbs),
+      'layout-bottom': () => h(SiteFooter),
       'nav-bar-title-after': () => h(NavTitle),
       'nav-bar-content-after': () => h(NolebaseEnhancedReadabilitiesMenu),
       'nav-screen-content-after': () => h(NolebaseEnhancedReadabilitiesScreenMenu)
