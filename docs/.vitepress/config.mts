@@ -175,7 +175,10 @@ export default defineConfig({
             {
               text: "快速开始",
               collapsed: false,
-              items: [{ text: "简介", link: "/docs/" }],
+              items: [
+                { text: "简介", link: "/docs/" },
+                { text: "安装", link: "/docs/install" },
+              ],
             },
             {
               text: "智能",
@@ -197,6 +200,14 @@ export default defineConfig({
                 { text: "概览", link: "/dev/" },
                 { text: "基础工作流", link: "/dev/guide" },
                 { text: "开源协议", link: "/dev/license" },
+              ],
+            },
+          ],
+          "/about/": [
+            {
+              text: "关于",
+              items: [
+                { text: "关于我们", link: "/about/" },
               ],
             },
           ],
@@ -241,7 +252,10 @@ export default defineConfig({
             {
               text: "Getting Started",
               collapsed: false,
-              items: [{ text: "Introduction", link: "/en/docs/" }],
+              items: [
+                { text: "Introduction", link: "/en/docs/" },
+                { text: "Install", link: "/en/docs/install" },
+              ],
             },
             {
               text: "Intelligence",
@@ -268,6 +282,14 @@ export default defineConfig({
                 { text: "Overview", link: "/en/dev/" },
                 { text: "Basic Workflow", link: "/en/dev/guide" },
                 { text: "License", link: "/en/dev/license" },
+              ],
+            },
+          ],
+          "/en/about/": [
+            {
+              text: "About",
+              items: [
+                { text: "About Us", link: "/en/about/" },
               ],
             },
           ],

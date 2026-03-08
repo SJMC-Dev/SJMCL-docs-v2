@@ -9,6 +9,7 @@ hero:
   text: ''
   tagline: |
     新一代开源跨平台 Minecraft 启动器
+    由上海交通大学 Minecraft 社成员自主开发
   actions:
     - theme: brand
       text: 下载
@@ -22,6 +23,9 @@ hero:
     - theme: alt
       text: GitHub
       link: https://github.com/UNIkeEN/SJMCL
+  image:
+    src: /logo.png
+    alt: SJMC Launcher
 features:
   - icon: 🪟
     title: 跨平台支持

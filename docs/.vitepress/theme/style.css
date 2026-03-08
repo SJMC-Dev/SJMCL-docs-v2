@@ -160,6 +160,7 @@ body {
   background-color: rgba(15, 23, 42, 0.68);
 }
 
+/* Non-sidebar pages: frosted glass effect */
 .VPNavBar:not(.has-sidebar):not(.home.top),
 .DocSearch-Button,
 .curtain,
@@ -177,15 +178,42 @@ body {
   backdrop-filter: blur(14px);
 }
 
+/* Sidebar pages: apply nav-bg on the VPNavBar element itself for edge-to-edge coverage, since
+   VitePress only colors .content-body (partial width) on sidebar pages at desktop widths. */
+.VPNavBar.has-sidebar:not(.home.top) {
+  background-color: var(--vp-nav-bg-color) !important;
+  backdrop-filter: none !important;
+}
+
+.dark .VPNavBar.has-sidebar:not(.home.top) {
+  background-color: var(--vp-nav-bg-color) !important;
+}
+
+/* Let the nav bar container span the full viewport width on all pages. */
+.VPNavBar .wrapper {
+  padding: 0 !important;
+}
+
+.VPNavBar .container {
+  max-width: none !important;
+  margin: 0 !important;
+  padding-left: max(env(safe-area-inset-left), 24px) !important;
+  padding-right: max(env(safe-area-inset-right), 24px) !important;
+}
+
 @media (min-width: 960px) {
-  .VPNavBar:not(.home.top) .content-body {
-    background-color: rgba(255, 255, 255, 0);
-    backdrop-filter: blur(10px);
+  /* Restore the sidebar bg color on the .title area (logo + site name) so it visually
+     connects to the sidebar panel below, matching the original VitePress two-tone design. */
+  .VPNavBar.has-sidebar .title {
+    background-color: var(--vp-sidebar-bg-color) !important;
+    transition: background-color 0.5s;
   }
 
-  .dark .VPNavBar:not(.home.top) .content-body {
-    background-color: rgba(10, 14, 24, 0.22);
-    backdrop-filter: blur(14px);
+  /* Make content-body transparent — VPNavBar's own background fills the full width,
+     so there's no need for content-body to carry its own partial-width background. */
+  .VPNavBar.has-sidebar .content-body {
+    background-color: transparent !important;
+    backdrop-filter: none !important;
   }
 }
 

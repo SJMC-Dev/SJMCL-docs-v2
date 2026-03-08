@@ -9,6 +9,7 @@ hero:
   text: ''
   tagline: |
     Next-generation open-source cross-platform Minecraft launcher
+    developed by the SJTU Minecraft Club
     
   actions:
     - theme: brand
@@ -23,6 +24,9 @@ hero:
     - theme: alt
       text: GitHub
       link: https://github.com/UNIkeEN/SJMCL
+  image:
+    src: /logo.png
+    alt: SJMC Launcher
 features:
   - icon: 🪟
     title: Cross Platform
