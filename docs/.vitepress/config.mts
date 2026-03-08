@@ -185,6 +185,10 @@ export default defineConfig({
                   text: "启动器 MCP 服务",
                   link: "/docs/intelligence/launcher-mcp",
                 },
+                {
+                  text: "MiuChat",
+                  link: "/docs/intelligence/miuchat",
+                },
               ],
             },
             { text: "更新日志", link: "/docs/changelog" },
@@ -251,15 +255,14 @@ export default defineConfig({
                   text: "Launcher MCP Service",
                   link: "/en/docs/intelligence/launcher-mcp",
                 },
+                {
+                  text: "MiuChat",
+                  link: "/en/docs/intelligence/miuchat",
+                },
               ],
             },
-            {
-              text: "Docs",
-              items: [
-                { text: "Changelog", link: "/en/docs/changelog" },
-                { text: "Terms of Service", link: "/en/docs/tos" },
-              ],
-            },
+            { text: "Changelog", link: "/en/docs/changelog" },
+            { text: "Terms of Service", link: "/en/docs/tos" },
           ],
           "/en/dev/": [
             {

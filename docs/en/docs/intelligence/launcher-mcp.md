@@ -17,8 +17,6 @@ Before configuring an external Agent app, first enable the service port in the l
 
 ![](/images/launcher-mcp-sjmcl-1.png)
 
----
-
 ## Configure External Agent Apps
 
 ### Configure Claude

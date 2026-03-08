@@ -14,8 +14,6 @@
 
 ![](/images/launcher-mcp-sjmcl-1.png)
 
----
-
 ## 设置外部 Agent 应用
 
 ### 配置 Claude
