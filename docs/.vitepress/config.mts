@@ -210,7 +210,19 @@ export default defineConfig({
                 { text: '关于我们', link: '/about/' }
               ]
             }
-          ]
+          ],
+          '/group/': [
+            {
+              text: '用户社群',
+              collapsed: false,
+              items: [
+                { text: '简介', link: '/group/' },
+                { text: '交流守则', link: '/group/rules' },
+                { text: 'QQ 交流群', link: '/group/qq' },
+                { text: '其它反馈渠道', link: '/group/others' }
+              ]
+            }
+          ],
         },
         docFooter: {
           prev: '上一页',
@@ -288,7 +300,19 @@ export default defineConfig({
                 { text: 'About Us', link: '/en/about/' }
               ]
             }
-          ]
+          ],
+          '/en/group/': [
+            {
+              text: 'Community',
+              collapsed: false,
+              items: [
+                { text: 'Introduction', link: '/en/group/' },
+                { text: 'Rules', link: '/en/group/rules' },
+                { text: 'QQ Group', link: '/en/group/qq' },
+                { text: 'Other Feedback Channels', link: '/en/group/others' }
+              ]
+            }
+          ],
         },
         docFooter: {
           prev: 'Previous page',
