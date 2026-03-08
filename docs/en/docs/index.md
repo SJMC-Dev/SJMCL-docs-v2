@@ -2,7 +2,7 @@
 
 SJMC Launcher is a modern, cross-platform Minecraft launcher built on the Tauri framework, independently developed by members of the Shanghai Jiao Tong University Minecraft Club.
 
-Ready to get started? Head to [Install SJMCL](/en/docs/install).
+Ready to get started? Head to [Install SJMCL](/en/downloads/).
 
 > [!IMPORTANT]
 > NOT AN OFFICIAL MINECRAFT SERVICE. NOT APPROVED BY OR ASSOCIATED WITH MOJANG OR MICROSOFT.

@@ -2,7 +2,7 @@
 
 SJMC Launcher 是一款基于 Tauri 框架打造的现代化、跨平台 Minecraft 启动器，由上海交通大学 Minecraft 社的成员自主开发。
 
-准备好了？前往[安装 SJMCL](/docs/install)开始使用。
+准备好了？前往[安装 SJMCL](/downloads/)开始使用。
 
 > [!IMPORTANT]
 > 本软件非 Minecraft 官方产品。未经 Mojang 或 Microsoft 批准，也不与 Mojang 或 Minecraft 关联。
