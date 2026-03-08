@@ -177,7 +177,6 @@ export default defineConfig({
               collapsed: false,
               items: [
                 { text: "简介", link: "/docs/" },
-                { text: "安装", link: "/docs/install" },
               ],
             },
             {
@@ -254,7 +253,6 @@ export default defineConfig({
               collapsed: false,
               items: [
                 { text: "Introduction", link: "/en/docs/" },
-                { text: "Install", link: "/en/docs/install" },
               ],
             },
             {
