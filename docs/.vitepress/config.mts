@@ -175,7 +175,10 @@ export default defineConfig({
             {
               text: "快速开始",
               collapsed: false,
-              items: [{ text: "简介", link: "/docs/" }],
+              items: [
+                { text: '简介', link: '/docs/' },
+                { text: '新手教程', link: '/docs/beginners-guide/' }
+              ]
             },
             {
               text: "智能",
@@ -245,7 +248,16 @@ export default defineConfig({
             {
               text: "Getting Started",
               collapsed: false,
-              items: [{ text: "Introduction", link: "/en/docs/" }],
+              items: [
+                { 
+                  text: 'Introduction',
+                  link: '/en/docs/' 
+                },
+                { 
+                  text: 'Beginner\'s Guide', 
+                  link: '/docs/beginners-guide/' 
+                }
+              ]
             },
             {
               text: "Intelligence",
