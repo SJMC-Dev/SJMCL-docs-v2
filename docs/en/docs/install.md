@@ -4,7 +4,7 @@ You can directly [download from this site](/en/downloads/) to get the latest SJM
 
 ## Supported Platforms
 
-| Platform | System Requirement (from README) | Supported Architectures | Available Package / Distribution Formats |
+| Platform | System Requirement | Supported Architectures | Available Package / Distribution Formats |
 | --- | --- | --- | --- |
 | Windows | Windows 7 or later | `aarch64`, `i686`, `x86_64` | Installer `.exe`, Portable `.exe` |
 | macOS | macOS 10.15 or later | `aarch64`, `x86_64` | `.app`, `.dmg` |
