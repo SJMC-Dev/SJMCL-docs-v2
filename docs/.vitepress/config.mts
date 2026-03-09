@@ -249,7 +249,14 @@ export default defineConfig({
               text: "Getting Started",
               collapsed: false,
               items: [
-                { text: 'Introduction', link: '/en/docs/' },{ text: 'Beginners Guide', link: '/docs/beginners-guide/' }
+                { 
+                  text: 'Introduction',
+                  link: '/en/docs/' 
+                },
+                { 
+                  text: 'Beginner\'s Guide', 
+                  link: '/docs/beginners-guide/' 
+                }
               ]
             },
             {
