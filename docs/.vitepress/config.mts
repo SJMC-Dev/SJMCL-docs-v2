@@ -201,7 +201,7 @@ export default defineConfig({
           ],
           "/dev/": [
             {
-              text: "SJMCL",
+              text: "开发者",
               items: [
                 { text: "概览", link: "/dev/" },
                 { text: "基础工作流", link: "/dev/guide" },
@@ -289,7 +289,7 @@ export default defineConfig({
           ],
           "/en/dev/": [
             {
-              text: "SJMCL",
+              text: "Developers",
               items: [
                 { text: "Overview", link: "/en/dev/" },
                 { text: "Basic Workflow", link: "/en/dev/guide" },

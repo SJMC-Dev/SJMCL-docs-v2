@@ -19,7 +19,7 @@ hero:
       link: /en/docs/
     - theme: alt
       text: QQ Group
-      link: /en/docs/user-group
+      link: /en/docs/user-group#qq-group
     - theme: alt
       text: GitHub
       link: https://github.com/UNIkeEN/SJMCL
