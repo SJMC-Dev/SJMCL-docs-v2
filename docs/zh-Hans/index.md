@@ -18,7 +18,7 @@ hero:
       link: /docs/
     - theme: alt
       text: 用户 QQ 群
-      link: https://qm.qq.com/cgi-bin/qm/qr?k=GIGpauoghFeXKZyomQKFIoE_ZfPQIOpV&jump_from=webapi&authKey=I6J4u14K8opcMmGKflI3fTdlDBZYeveVYwIU/yctCFUrH/yYIX7GwhEjwVEa2+f6
+      link: /docs/user-group
     - theme: alt
       text: GitHub
       link: https://github.com/UNIkeEN/SJMCL
