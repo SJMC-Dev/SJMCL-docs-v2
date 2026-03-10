@@ -16,7 +16,7 @@ Opens the Add Authentication Server dialog and automatically fills in the target
 
 ### Format
 
-```text
+```sh
 sjmcl://add-auth-server?url=<server_url>
 ```
 
@@ -28,7 +28,7 @@ sjmcl://add-auth-server?url=<server_url>
 
 ### Examples
 
-```text
+```sh
 sjmcl://add-auth-server?url=https%3A%2F%2Flittleskin.cn%2Fapi%2Fyggdrasil
 sjmcl://add-auth-server?url=https%3A%2F%2Fexample.com%2Fapi%2Fyggdrasil
 ```
@@ -39,7 +39,7 @@ Launches the specified instance and directly enters the launch flow. SJMCL itsel
 
 ### Format
 
-```text
+```sh
 sjmcl://launch?id=<instance_id>
 ```
 
@@ -57,7 +57,7 @@ sjmcl://launch?id=<instance_id>
 
 ### Examples
 
-```text
+```sh
 sjmcl://launch?id=OFFICIAL_DIR%3A1.20.1
 sjmcl://launch?id=CURRENT_DIR%3AFabric%201.20.1
 ```

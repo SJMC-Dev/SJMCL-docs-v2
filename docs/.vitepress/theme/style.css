@@ -36,7 +36,7 @@
     linear-gradient(145deg, rgba(255, 255, 255, 0.78), rgba(255, 255, 255, 0.35));
   --vp-home-hero-image-filter: blur(44px);
   --vp-font-family-base: -apple-system, "PingFang SC", "Sinter", BlinkMacSystemFont, "Segoe UI", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-  --vp-font-family-mono: "SFMono-Regular", "JetBrains Mono", "Menlo", monospace;
+  --vp-font-family-mono:  "SFMono-Regular", ui-monospace, "Cascadia Code", Consolas, "JetBrains Mono", Menlo, Monaco, "Liberation Mono", "DejaVu Sans Mono", monospace;
 }
 
 /* Keep a persistent right-side scrollbar across pages to avoid layout shift. */
