@@ -37,9 +37,9 @@ features:
     title: Multi-Account System Support
     details: Built-in Microsoft login and third-party authentication server support, compatible with the OAuth login process proposed by the Yggdrasil Connect proposal.
   - icon: 🌐
-    title: Deeplink Integration
-    details: Integrates with external websites and tool collections, providing convenient features such as desktop shortcuts for launching instances through system deeplinks.
-  - icon: ''
-    title: ''
-    details: ''
+    title: External Service Collaboration
+    details: Works with external webpages, applications, and Agent services through deeplinks and MCP services, delivering a range of convenient features and automation capabilities.
+  - icon: 🧩
+    title: Open Plugin System
+    details: Supports plugin development to extend the launcher with more interesting and practical features. (Coming Soon)
 ---

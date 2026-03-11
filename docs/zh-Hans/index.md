@@ -36,9 +36,9 @@ features:
     title: 多账户系统支持
     details: 内置 Microsoft 登录与第三方认证服务器支持，兼容 Yggdrasil Connect 的 OAuth 登录流程规范提案。
   - icon: 🌐
-    title: 深度链接集成
-    details: 可与外部网站与工具集联动，支持通过系统深度链接、桌面快捷方式一键启动实例等便捷功能。
-  - icon: ''
-    title: ''
-    details: ''
+    title: 外部服务协同
+    details: 通过深度链接与 MCP 服务，与外部网页、程序及 Agent 服务协同工作，提供一系列便捷功能与自动化能力。
+  - icon: 🧩
+    title: 开放插件系统
+    details: 支持开发插件，为启动器扩展更多有趣且实用的功能。（即将推出）
 ---
