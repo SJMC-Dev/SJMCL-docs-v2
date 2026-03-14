@@ -41,4 +41,8 @@ makepkg -si
 
 ## FAQ
 
-TBD
+### Gdk-Message: 23:55:52.007: Error 71 (Protocol error) dispatching to Wayland display.
+
+This is an [upstream issue](https://github.com/tauri-apps/tauri/issues/9394),which usually occurs when using Wayland with an NVIDIA discrete GPU.
+
+Please add the environment variable`__NV_DISABLE_EXPLICIT_SYNC=1`or`WEBKIT_DISABLE_DMABUF_RENDERER=1`
