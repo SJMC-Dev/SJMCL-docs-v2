@@ -1,162 +1,99 @@
-# SJMCL Interface & Features Guide
+# Interface and Features
 
-Welcome to SJMCL (SJMC Launcher)! This guide walks you through the launcher's core UI and features so you can quickly get started and enjoy a modern, efficient Minecraft launch and management experience.
+Welcome to SJMCL! This document walks you through the launcher's interface and feature modules, helping you get started quickly and enjoy an efficient, modern Minecraft launch and management experience.
 
----
+## Top Navigation Bar
 
-## 1. Top Navigation Bar
+This area is shown globally. From left to right, there are five main sections: **Launch**, **Instances**, **Accounts**, **Discover**, and **Settings**.
 
-This area is always visible. From left to right it includes the title and five main clickable sections: **Launch**, **Instances**, **Accounts**, **Search**, and **Settings**.
+![Top Navigation Bar](/images/gui-en-topbar.png)
 
-![Top Navigation Bar](/images/gui-topbar.png)
+## Launch Screen
 
-## 2. Launch Screen
+The launch screen is your first stop before entering the game. In the bottom-right corner, you can quickly select an account, switch instances, and start the game.
 
-The Launch Screen is the first stop before entering the game. Here you can quickly choose an account, switch instances, and start Minecraft with a single click.
+![Launch Screen](/images/gui-en-start-overview.png)
 
-*   **First-run setup**: The first time you open the launcher, this screen appears so you can read the Terms of Service and configure **Language Preferences** (bottom-left) if needed.
+* **Quick switch & launch**: Before starting the game, click the **switch button** in the top-right corner of the profile or instance card to open a quick menu where you can switch accounts or instance versions. Click **Launch Game** to launch Minecraft.
 
-![First Run Setup](/images/gui-start-first-start.png)
+![Switch & start](/images/gui-en-start-switch.png)
 
-*   **Launch page**: Shows your custom background and provides the account selector and launch button in the bottom-right.
+## Instances
 
-![Launch Page](/images/gui-start-overview.png)
-
-*   **Quick switch & start**: Before launching, click the **switch button** in the top-right of the **Account** or **Instance** panel to quickly swap accounts or versions from the pop-up overlay. Click **Launch Game** to start Minecraft immediately.
-
-![Account Switch](/images/gui-start-account-select.png)
-
-![Instance Switch](/images/gui-start-game-version-select.png)
-
-*   **Game logs & crash analysis**:
-    *   **Live log viewing**: If you enable "Show Game Log" in Settings, a log window opens automatically when the game starts. You can filter by keyword, log level (FATAL, ERROR, etc.), and export logs for troubleshooting.
-    ![Game Log](/images/gui-start-game-log.png)
-    *   **Smart crash analysis**: If the game crashes unexpectedly, SJMCL captures the crash cause and shows an analysis window (including Java version, system architecture, and crash details) to help you quickly locate and resolve the issue.
-    ![Crash Analysis](/images/gui-start-game-error.png)
-
----
-
-## 3. Instances Screen
-
-The Instances screen is where you manage all game versions, mods, and saves. SJMCL uses a multi-directory, isolated instance storage mechanism.
-
-![Instances Overview](/images/gui-instance-overview.png)
+The Instances section is the core area for managing all game versions, mods, and saved worlds. SJMCL uses a multi-directory, multi-instance isolated storage model.
 
 ### All Instances
 
-The "All Instances" view displays every instance across your game directories and provides quick actions for each.
+The **All Instances** view displays all instances across your game directories and provides quick actions for each instance.
 
-![All Instances](/images/gui-instance-all-instance.png)
+![Instances Overview](/images/gui-en-instance-overview.png)
 
-#### Top Bar
+From left to right, the top toolbar includes:
 
-From left to right, the top bar includes refresh and sorting controls:
-* **Refresh**: Reloads the current view.
-* **Sort & filter**: Sort instances by game version (ascending/descending) or instance name.
-* **View toggle**: Switch between grid view and list view.
-* **Add & Import**: Navigate to the Add & Import screen.
-* **Launch game**: Launch the currently selected instance.
+* **Refresh**: Refresh the current view
+* **Sort & Filter**: Sort instances by game version (ascending/descending) or by instance name
+* **View Toggle**: Switch between grid view and list view
+* **Add & Import**: Go to the **Add & Import** view
+* **Launch Game**: Launch the currently selected instance
 
-![All Instances Top Bar](/images/gui-instance-topbar.png)
-
-#### Specific Instance
-
-In grid view, click the **"…"** menu in an instance's top-right corner to open the instance folder, go to its details page, or delete the instance.
-
-![Specific Instance](/images/gui-instance-all-instance-certain-one.png)
+![All Instances Topbar](/images/gui-en-instance-topbar.png)
 
 ### Instance Details
 
-Click an instance in the sidebar to open the details view. This page shows multi-dimensional information about the selected instance, including overview, mods, resource packs, and screenshots.
+Click an instance in the sidebar to go to its detail page. This page shows an overview of the selected instance, and you can manage different kinds of game resources via tabs.
 
-![Instance Details](/images/gui-instance-sub-instance.png)
+![Instance Details](/images/gui-en-instance-sub-instance.png)
 
-#### Top Bar
+From left to right, the top toolbar includes:
 
-From left to right, the top bar includes instance name, starring, open folder, create shortcut, and more:
-* **Instance Name**: Displays the instance name.
-* **Star**: Star an instance to pin it to the top of the sidebar and the All Instances list (if sorting hasn't changed, click Refresh in the All Instances top bar).
-* **Open Folder**: Opens the instance folder.
-* **Create Shortcut**: Creates a desktop shortcut to launch this instance.
-* **Export Pack**: Export the instance as a pack.
-* **Delete Instance**: Delete the current instance.
-* **Launch Instance**: Launch the current instance.
+* **Instance Name**: Shows the instance name
+* **Star**: Starring the current instance pins it to the top of the sidebar and the **All Instances** view (if sorting doesn’t change, click **Refresh** in the **All Instances** top bar)
+* **Open Folder**: Open the instance folder
+* **Create Shortcut**: Create a desktop shortcut that launches this instance directly
+* **Export Pack**: Export the current instance as a modpack
+* **Delete Instance**: Delete the current instance
+* **Launch Instance**: Start the current instance
 
-![Instance Details Top Bar](/images/gui-instance-sub-instance-topbar.png)
-
-#### Module Pages
-
-TBD
+![Instance Details Topbar](/images/gui-en-instance-sub-instance-topbar.png)
 
 ### Add & Import
 
-In **Add & Import**, you can:
-* Install a clean or modded instance with one click.
-* Import a local pack or **download and import a pack** directly from major platforms like CurseForge or Modrinth.
-* Link and manage an existing local game directory to seamlessly continue using your old data.
-* Download vanilla server files for any supported version.
+Click the **Add & Import** button in the bottom-left corner to:
 
-![Add & Import](/images/gui-instance-new-instance.png)
+* Install a new game instance (vanilla or with a mod loader)
+* Import a local modpack, or download and import one directly from CurseForge, Modrinth, and other major platforms
+* Link and manage an existing local game directory, bridging instance data from other launchers
+* Download official server files for various game versions
+
+![Add & Import](/images/gui-en-instance-new-instance.png)
 
 ### Global Game Settings
 
-Quick access to the Global Game Settings section in Settings.
+Click **Global Game Settings** in the left menu to jump directly to the global game settings section in the Settings page.
 
----
+## Accounts
 
-## 4. Accounts Screen
+SJMCL supports a multi-user authentication system that unifies Microsoft accounts, offline accounts, and third-party authentication (skin site) accounts. You can view and select characters by source, with both grid and list display options.
 
-SJMCL includes a powerful multi-user authentication system that integrates with Microsoft's official account system, supporting multiple profiles and identity switching for different use cases.
+![Accounts Overview](/images/gui-en-account-overview.png)
 
-![Accounts Overview](/images/gui-account-overview.png)
+## Discover
 
-### Multi-Account Overview
+![Discover Overview](/images/gui-en-discover.png)
 
-View accounts grouped by source, with grid or list layouts for easy browsing.
+SJMCL is not just a key to start the game—it’s a window to deep Minecraft news and content. Use aggregated search, view news, and browse popular modpacks here.
 
-### Account Details
+* **Aggregated Search**: Type a keyword to search across **local accounts, game resources**, and **online game resources**. Use shortcut `Ctrl` (⌘ on macOS) + `S` to open it quickly.
 
-TBD
+    ![Aggregated Search](/images/gui-en-search.png)
 
-### Import from Other Launchers
+* **Minecraft News**: TBD
 
-Import account information quickly from other launchers.
+* **Community News**: TBD
 
-![Import from Other Launchers](/images/gui-account-upload-other-launcher.png)
+## Settings
 
-### Add Auth Server
+In Settings you can configure the launcher's appearance, download options, global game settings, and manage game Java; you can also view documentation and help information.
 
-Add a skin site authentication server.
-
-![Add Auth Server](/images/gui-account-add-auth.png)
-
----
-
-## 5. Search & Discovery Screen
-
-SJMCL is not just a launch key — it's also a window into deep Minecraft content.
-
-*   **Unified search**: Click "Search" from anywhere, type a keyword, and search both **local instance resources** and **online game components** in one place. When "Discovery" is enabled, you can also invoke it with Ctrl+S.
-
-![Unified Search](/images/gui-search.png)
-
-*   **Discovery feed**: When you enable "Discovery page" mode in Settings > General, the Search bar becomes **Discovery**.
-    *   Browse the latest announcements, news, and guides from configured sources (e.g., the SJMC community home page).
-    *   Click any card to open the related webpage.
-    *   Manage and add additional content sources at any time.
-
-![Discovery Feed](/images/gui-find.png)
-
----
-
-## 6. Settings Screen
-
-Provides deep personalization and launcher tuning so SJMCL fits your workflow. Includes Global Game Settings, Java management, General, Appearance, Downloads, Sync & Restore, Docs & Help, About, and more.
-
-![Settings Overview](/images/gui-settings-overview.png)
-
-### TBD
-
-TBD
-
+![Settings Overview](/images/gui-en-settings-overview.png)
 
