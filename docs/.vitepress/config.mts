@@ -178,8 +178,9 @@ export default defineConfig({
               items: [
                 { text: '简介', link: '/docs/' },
                 { text: '下载与安装', link: '/docs/install' },
-                { text: '新手教程', link: '/docs/beginners-guide' }
-              ]
+                { text: '新手教程', link: '/docs/beginners-guide' },
+                { text: '界面与功能', link: '/docs/gui-and-function' },
+              ],
             },
             {
               text: "智能",
@@ -198,7 +199,6 @@ export default defineConfig({
             { text: "更新日志", link: "/docs/changelog" },
             { text: "用户协议", link: "/docs/tos" },
             { text: "用户社群", link: "/docs/user-group" },
-            { text: "界面与功能", link: "/docs/gui-and-function" },
           ],
           "/dev/": [
             {
@@ -267,8 +267,12 @@ export default defineConfig({
                 { 
                   text: 'Beginner\'s Guide', 
                   link: '/en/docs/beginners-guide' 
-                }
-              ]
+                },
+                {
+                  text: 'GUI and Function',
+                  link: '/en/docs/gui-and-function'
+                },
+              ],
             },
             {
               text: "Intelligence",
@@ -287,7 +291,6 @@ export default defineConfig({
             { text: "Changelog", link: "/en/docs/changelog" },
             { text: "Terms of Service", link: "/en/docs/tos" },
             { text: "User Group", link: "/en/docs/user-group" },
-            { text: "GUI and Function", link: "/en/docs/gui-and-function" },
           ],
           "/en/dev/": [
             {
