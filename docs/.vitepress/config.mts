@@ -178,8 +178,9 @@ export default defineConfig({
               items: [
                 { text: '简介', link: '/docs/' },
                 { text: '下载与安装', link: '/docs/install' },
-                { text: '新手教程', link: '/docs/beginners-guide' }
-              ]
+                { text: '新手教程', link: '/docs/beginners-guide' },
+                { text: '界面与功能', link: '/docs/gui-and-function' },
+              ],
             },
             {
               text: "智能",
@@ -266,8 +267,12 @@ export default defineConfig({
                 { 
                   text: 'Beginner\'s Guide', 
                   link: '/en/docs/beginners-guide' 
-                }
-              ]
+                },
+                {
+                  text: 'GUI and Function',
+                  link: '/en/docs/gui-and-function'
+                },
+              ],
             },
             {
               text: "Intelligence",
