@@ -1,6 +1,18 @@
-# Installing Mods
+# Installing Mod Loaders
 
-## Auto Install
+When installing a new game client, you will see 4 mod loaders available: `Forge`, `Fabric`, `NeoForge`, and `Optifine`.
+
+When selecting Fabric, `Fabric API` will be included by default — you can uncheck it at the bottom of the screen.
+
+If you are unsure which mod loader to choose, we recommend `Fabric` / `NeoForge` for versions 1.14 and above, and `Forge` for versions below 1.14.
+
+![](/images/mod-loader-download-step1.png)
+
+## Installing Mods
+
+There are multiple ways to install mods in SJMCL. Choose the method that best suits your needs.
+
+### Auto Install
 
 The mod download interface is located within each instance. Go to the instance manager, select the instance you want to add mods to, switch to the **Mods** tab, and click the **Download Mods** button in the quick action bar on the right.
 
@@ -22,7 +34,7 @@ Click a specific version of a mod to download it. A popup will show all optional
 > [!TIP]
 > Worlds, resource packs, shader packs, and data packs can all be downloaded in a similar way.
 
-## Manual Install
+### Manual Install
 
 Most mod files have a `.jar` extension.
 
@@ -35,14 +47,14 @@ Alternatively, you can add mods through SJMCL's **Game Management — Mod Manage
 > [!TIP]
 > Do not extract or unzip the mod's `.jar` file.
 
-## Auto Update
+### Auto Update
 
 SJMCL supports automatic checking and updating of installed mods. Click the **Check for Updates** button in the top right corner of the mod management page to check automatically.
 
 > [!TIP]
 > It is recommended to back up your game saves before updating mods, in case of compatibility issues.
 
-## Game Crashes / Errors After Installing Mods
+### Game Crashes / Errors After Installing Mods
 
 There are many reasons why a game may crash after installing mods, such as:
 
@@ -64,7 +76,7 @@ There are many reasons why a game may crash after installing mods, such as:
 
 3. For modpacks with many mods where conflicts are hard to identify, use the bisect method — add or remove half the mods at a time, restart the game, and narrow down until you find the culprit.
 
-### Getting Help
+#### Getting Help
 
 If the issue persists:
 
@@ -74,3 +86,4 @@ If the issue persists:
 
 > [!TIP]
 > Please do not submit a GitHub issue for general game launch errors unrelated to the launcher.
+

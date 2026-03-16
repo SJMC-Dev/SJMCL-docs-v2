@@ -39,7 +39,7 @@
 
    > [!TIP]
    > 什么是模组加载器？我应该选择哪一个？
-   > 请参考：[安装模组加载器](/docs/modloader/)
+   > 请参考：[安装模组加载器](/docs/modloader)
 
    ![选择加载器](/images/beginners-guide-game-loader.png)
 

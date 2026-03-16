@@ -183,10 +183,7 @@ export default defineConfig({
                 { text: '新手教程', link: '/docs/beginners-guide' },
                 {
                   text: '安装模组加载器',
-                  link: '/docs/modloader/',
-                  items: [
-                    { text: '安装模组', link: '/docs/modloader/install-mods' }
-                  ]
+                  link: '/docs/modloader'
                 }
               ]
             },
@@ -278,10 +275,7 @@ export default defineConfig({
                 },
                 {
                   text: 'Installing Mod Loaders',
-                  link: '/en/docs/modloader/',
-                  items: [
-                    { text: 'Installing Mods', link: '/en/docs/modloader/install-mods' }
-                  ]
+                  link: '/en/docs/modloader'
                 }
               ]
             },
