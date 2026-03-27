@@ -202,7 +202,6 @@ body {
     background-color: transparent;
   }
 
-  /* 黑夜模式 有sidebar：模糊放在 .content-body 并扩展覆盖右侧 padding */
   .dark .VPNavBar.has-sidebar:not(.home.top) {
     background-color: transparent;
   }
