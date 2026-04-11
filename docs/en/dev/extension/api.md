@@ -350,6 +350,6 @@ host.actions.reloadSelf();
 
 ## Related Docs
 
-- [Extension System](/en/dev/extension/introduction)
+- [Extension System](/en/dev/extension/)
 - [File Structure](/en/dev/extension/file-structure)
 - [Quick Start](/en/dev/extension/quick-start)

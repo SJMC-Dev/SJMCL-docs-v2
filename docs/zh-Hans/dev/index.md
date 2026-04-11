@@ -11,7 +11,7 @@
 
 ### 扩展
 
-- [扩展系统介绍](/dev/extension/introduction)
+- [系统介绍](/dev/extension/)
 - [文件结构](/dev/extension/file-structure)
 - [快速开始](/dev/extension/quick-start)
 - [API](/dev/extension/api)

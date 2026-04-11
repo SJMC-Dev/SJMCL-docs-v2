@@ -1,6 +1,6 @@
 # 快速开始
 
-这一页会带你从零做出一个最小可运行的 SJMCL 扩展。目标是尽快跑通完整链路：创建目录、写清单、写前端入口、打包并导入启动器。
+这一页会带你从零做出一个最小可运行的 SJMCL 扩展。
 
 ## 第一步：创建目录
 
@@ -181,8 +181,3 @@ zip -r org.example.hello.sjmclx org.example.hello
 - `frontend.entry` 路径是否存在
 - `minimalLauncherVersion` 是否高于启动器版本
 - 入口脚本是否真的调用了 `window.registerExtension(...)`
-
-## 下一步
-
-- 想了解架构和边界，请看 [扩展系统介绍](/dev/extension/introduction)
-- 想系统查看字段和方法，请看 [API](/dev/extension/api)

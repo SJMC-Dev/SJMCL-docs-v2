@@ -150,5 +150,5 @@ org.example.hello/
 
 ## Related Docs
 
-- [Extension System](/en/dev/extension/introduction)
+- [Extension System](/en/dev/extension/)
 - [Quick Start](/en/dev/extension/quick-start)

@@ -164,5 +164,5 @@ Newly added extensions are enabled by default.
 
 ## Next Steps
 
-- For architecture and constraints, read [Extension System](/en/dev/extension/introduction)
+- For architecture and constraints, read [Extension System](/en/dev/extension/)
 - For fields and methods, read [API](/en/dev/extension/api)

@@ -11,7 +11,7 @@ This section contains developer documentation for SJMCL itself, including develo
 
 ### Extensions
 
-- [Extension System](/en/dev/extension/introduction)
+- [System Overview](/en/dev/extension/)
 - [File Structure](/en/dev/extension/file-structure)
 - [Quick Start](/en/dev/extension/quick-start)
 - [API](/en/dev/extension/api)

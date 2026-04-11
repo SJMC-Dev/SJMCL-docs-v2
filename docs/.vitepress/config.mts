@@ -77,6 +77,7 @@ function createBreadcrumbs(relativePath: string, title: string) {
         instance: "Game Instances",
         intelligence: "Intelligence",
         dev: "Developers",
+        extension: "Extensions",
         blog: "Blog",
         about: "About",
       }
@@ -85,6 +86,7 @@ function createBreadcrumbs(relativePath: string, title: string) {
         instance: "游戏实例",
         intelligence: "智能",
         dev: "开发者",
+        extension: "扩展",
         blog: "博客",
         about: "关于",
       };
@@ -224,8 +226,8 @@ export default defineConfig({
               text: "扩展",
               items: [
                 {
-                  text: "扩展系统介绍",
-                  link: "/dev/extension/introduction",
+                  text: "系统介绍",
+                  link: "/dev/extension/",
                 },
                 {
                   text: "文件结构",
@@ -340,8 +342,8 @@ export default defineConfig({
               text: "Extensions",
               items: [
                 {
-                  text: "Extension System",
-                  link: "/en/dev/extension/introduction",
+                  text: "System Overview",
+                  link: "/en/dev/extension/",
                 },
                 {
                   text: "File Structure",

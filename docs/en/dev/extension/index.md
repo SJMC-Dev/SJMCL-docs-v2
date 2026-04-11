@@ -38,9 +38,3 @@ The launcher allows extensions to provide the following UI contributions:
 - standalone custom pages
 
 These entries are declared explicitly by the extension during registration.
-
-## Docs
-
-- [File Structure](/en/dev/extension/file-structure)
-- [Quick Start](/en/dev/extension/quick-start)
-- [API](/en/dev/extension/api)
