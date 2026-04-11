@@ -9,6 +9,13 @@
 - [基础工作流](/dev/guide)
 - [开源协议](/dev/license)
 
+### 扩展
+
+- [扩展系统介绍](/dev/extension/introduction)
+- [文件结构](/dev/extension/file-structure)
+- [快速开始](/dev/extension/quick-start)
+- [API](/dev/extension/api)
+
 ### 外部集成
 
 - [Deeplink API](/dev/deeplink-api)

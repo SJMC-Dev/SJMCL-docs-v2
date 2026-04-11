@@ -9,6 +9,13 @@ This section contains developer documentation for SJMCL itself, including develo
 - [Basic Workflow](/en/dev/guide)
 - [License](/en/dev/license)
 
+### Extensions
+
+- [Extension System](/en/dev/extension/introduction)
+- [File Structure](/en/dev/extension/file-structure)
+- [Quick Start](/en/dev/extension/quick-start)
+- [API](/en/dev/extension/api)
+
 ### External Integrations
 
 - [Deeplink API](/en/dev/deeplink-api)

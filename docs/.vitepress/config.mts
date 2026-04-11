@@ -221,6 +221,27 @@ export default defineConfig({
               ],
             },
             {
+              text: "扩展",
+              items: [
+                {
+                  text: "扩展系统介绍",
+                  link: "/dev/extension/introduction",
+                },
+                {
+                  text: "文件结构",
+                  link: "/dev/extension/file-structure",
+                },
+                {
+                  text: "快速开始",
+                  link: "/dev/extension/quick-start",
+                },
+                {
+                  text: "API",
+                  link: "/dev/extension/api",
+                },
+              ],
+            },
+            {
               text: "外部集成",
               items: [{ text: "Deeplink API", link: "/dev/deeplink-api" }],
             },
@@ -313,6 +334,27 @@ export default defineConfig({
                 { text: "Overview", link: "/en/dev/" },
                 { text: "Basic Workflow", link: "/en/dev/guide" },
                 { text: "License", link: "/en/dev/license" },
+              ],
+            },
+            {
+              text: "Extensions",
+              items: [
+                {
+                  text: "Extension System",
+                  link: "/en/dev/extension/introduction",
+                },
+                {
+                  text: "File Structure",
+                  link: "/en/dev/extension/file-structure",
+                },
+                {
+                  text: "Quick Start",
+                  link: "/en/dev/extension/quick-start",
+                },
+                {
+                  text: "API",
+                  link: "/en/dev/extension/api",
+                },
               ],
             },
             {
