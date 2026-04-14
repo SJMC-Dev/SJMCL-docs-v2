@@ -13,7 +13,8 @@ This section contains developer documentation for SJMCL itself, including develo
 
 - [System Overview](/en/dev/extension/)
 - [File Structure](/en/dev/extension/file-structure)
-- [Quick Start](/en/dev/extension/quick-start)
+- [Quick Start (Scaffold)](/en/dev/extension/quick-start-scaffold)
+- [Quick Start (Manual Setup)](/en/dev/extension/quick-start)
 - [API](/en/dev/extension/api)
 
 ### External Integrations

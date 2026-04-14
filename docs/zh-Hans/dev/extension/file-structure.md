@@ -91,6 +91,6 @@ const logoUrl = api.resolveAssetUrl("assets/logo.png");
 
 扩展私有数据目录。
 
-这个目录用于运行时读写数据，例如：缓存文件、用户输入 与 插件的本地配置
+这个目录用于运行时读写数据，例如：缓存文件、用户输入 与 扩展的本地配置
 
 扩展通过 `host.actions.readFile()`、`writeFile()`、`deleteFile()`、`deleteDirectory()` 访问这里的内容。传入路径时使用相对路径，宿主会解析到扩展自己的 `data/` 目录下。

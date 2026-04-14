@@ -1,6 +1,6 @@
-# Quick Start
+# Quick Start (Manual Setup)
 
-This guide walks through the smallest useful SJMCL extension: create a folder, write the manifest, write the frontend entry, package it, and import it into the launcher.
+Besides using the scaffold, you can also write a minimal working SJMCL extension by hand.
 
 ## 1. Create the Folder
 
@@ -110,6 +110,8 @@ This covers the basic rules:
 - use `api.useHostData()` for reactive host-owned data
 - use `host.state.useExtensionState()` for extension-owned state
 
+Besides the home widget, you can also create custom pages and standalone windows. See [UI Contributions](./api.md#ui-contributions).
+
 ## 4. Optionally Add a Settings Page
 
 ```js
@@ -145,6 +147,8 @@ SJMCL accepts both `.sjmclx` and `.zip`. They are both zip archives in practice.
 zip -r org.example.hello.sjmclx org.example.hello
 ```
 
+You can also generate `org.example.hello.zip`, which the launcher can recognize as well.
+
 ## 6. Import It into SJMCL
 
 1. Open the launcher.
@@ -153,8 +157,9 @@ zip -r org.example.hello.sjmclx org.example.hello
 4. Click Add and select the package.
 
 Newly added extensions are enabled by default.
+If your extension provides a home widget or page, it will load automatically after the extension list is refreshed.
 
-## Debug Tips
+## Debugging
 
 - log through `host.actions.logger`
 - start with one `homeWidget`
@@ -162,7 +167,10 @@ Newly added extensions are enabled by default.
 - resolve assets with `api.resolveAssetUrl()`
 - call `host.actions.reloadSelf()` when you need a clean reload
 
-## Next Steps
+If the extension import fails, check these items first:
 
-- For architecture and constraints, read [Extension System](/en/dev/extension/)
-- For fields and methods, read [API](/en/dev/extension/api)
+- `sjmcl.ext.json` exists at the extension root
+- `identifier` is valid
+- `frontend.entry` points to an existing path
+- `minimalLauncherVersion` is not higher than the launcher version
+- the entry script actually calls `window.registerExtension(...)`

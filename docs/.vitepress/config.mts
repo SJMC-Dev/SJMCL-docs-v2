@@ -234,7 +234,11 @@ export default defineConfig({
                   link: "/dev/extension/file-structure",
                 },
                 {
-                  text: "快速开始",
+                  text: "快速开始（使用脚手架）",
+                  link: "/dev/extension/quick-start-scaffold",
+                },
+                {
+                  text: "快速开始（手动编写）",
                   link: "/dev/extension/quick-start",
                 },
                 {
@@ -350,7 +354,11 @@ export default defineConfig({
                   link: "/en/dev/extension/file-structure",
                 },
                 {
-                  text: "Quick Start",
+                  text: "Quick Start (Scaffold)",
+                  link: "/en/dev/extension/quick-start-scaffold",
+                },
+                {
+                  text: "Quick Start (Manual Setup)",
                   link: "/en/dev/extension/quick-start",
                 },
                 {
