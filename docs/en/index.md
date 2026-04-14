@@ -41,5 +41,5 @@ features:
     details: Works with external webpages, applications, and Agent services through deeplinks and MCP services, delivering a range of convenient features and automation capabilities.
   - icon: 🧩
     title: Open Plugin System
-    details: Supports plugin development to extend the launcher with more interesting and practical features. (Coming Soon)
+    details: Supports plugin development to extend the launcher with more interesting and practical features.
 ---
