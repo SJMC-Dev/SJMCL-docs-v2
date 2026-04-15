@@ -168,6 +168,10 @@ body {
   background-color: rgba(15, 23, 42, 0.68);
 }
 
+.VPNavBar .container {
+  max-width: 100% !important;
+}
+
 .VPNavBar:not(.has-sidebar):not(.home.top),
 .DocSearch-Button,
 .curtain,
@@ -186,12 +190,43 @@ body {
 }
 
 @media (min-width: 960px) {
-  .VPNavBar:not(.home.top) .content-body {
+  .VPNavBar.has-sidebar:not(.home.top) .content {
+    background-color: var(--vp-nav-bg-color);
+  }
+
+  .VPNavBar.has-sidebar:not(.home.top) .title {
+    background-color: var(--vp-sidebar-bg-color);
+  }
+
+  .VPNavBar.has-sidebar:not(.home.top) .content-body {
+    background-color: transparent;
+  }
+
+  .dark .VPNavBar.has-sidebar:not(.home.top) {
+    background-color: transparent;
+  }
+
+  .dark .VPNavBar.has-sidebar:not(.home.top) .content {
+    background-color: transparent;
+  }
+
+  .dark .VPNavBar.has-sidebar:not(.home.top) .content-body {
+    background-color: rgba(10, 14, 24, 0.22);
+    backdrop-filter: blur(14px);
+    margin-right: -32px;
+    padding-right: 32px;
+  }
+
+  .dark .VPNavBar.has-sidebar:not(.home.top) .title {
+    background-color: var(--vp-sidebar-bg-color);
+  }
+
+  .VPNavBar:not(.has-sidebar):not(.home.top) .content-body {
     background-color: rgba(255, 255, 255, 0);
     backdrop-filter: blur(10px);
   }
 
-  .dark .VPNavBar:not(.home.top) .content-body {
+  .dark .VPNavBar:not(.has-sidebar):not(.home.top) .content-body {
     background-color: rgba(10, 14, 24, 0.22);
     backdrop-filter: blur(14px);
   }
