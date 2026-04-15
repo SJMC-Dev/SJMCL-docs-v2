@@ -35,29 +35,35 @@ sjmcl://add-auth-server?url=https%3A%2F%2Fexample.com%2Fapi%2Fyggdrasil
 
 ## `launch`
 
-启动指定实例，并直接进入启动流程。SJMCL 本身也使用这一端点生成启动实例的桌面快捷方式。
+启动实例，并直接进入启动流程。SJMCL 本身也使用这一端点生成启动实例的桌面快捷方式。
 
 ### 格式
 
 ```sh
-sjmcl://launch?id=<instance_id>
+sjmcl://launch?[id=<instance_id>][&playerId=<player_id>][&quickPlaySingleplayer=<world_name>][&quickPlayMultiplayer=<server_addr>]
 ```
 
 ### 参数
 
 | 参数 | 类型 | 必填 | 说明 |
 | --- | --- | --- | --- |
-| `id` | `string` | 是 | 实例 ID |
+| `id` | `string` | 否 | 实例 ID；省略时使用当前已选中的实例 |
+| `playerId` | `string` | 否 | 玩家 ID；省略时使用当前已选中的玩家 |
+| `quickPlaySingleplayer` | `string` | 否 | 直接进入指定单人存档 |
+| `quickPlayMultiplayer` | `string` | 否 | 直接加入指定多人服务器地址 |
 
 ### 参数说明
 
-- 当前版本中，实例 ID 由启动器内部组合为 `<game_directory_name>:<instance_name>`
-- 常见示例：`OFFICIAL_DIR:1.20.1`
-- 如果实例名称中包含空格或其他特殊字符，建议整体进行 URL 编码
+- **`id` 和 `playerId` 传入 `tbd` 时，会在启动流程中弹出选择对话框，让用户手动选择实例或玩家**
+- 部分特定情况下无选中实例或玩家，此时无需传入 `tbd` 也会弹出选择对话框
+- 查询参数顺序不敏感，建议对每个参数值单独进行 URL 编码，尤其是包含空格、冒号或其他特殊字符时
 
 ### 示例
 
 ```sh
 sjmcl://launch?id=OFFICIAL_DIR%3A1.20.1
-sjmcl://launch?id=CURRENT_DIR%3AFabric%201.20.1
+sjmcl://launch?id=CURRENT_DIR%3AFabric%201.20.1&playerId=e9755ca2-6ebf-4ea7-a548-cf1074ab7f0f
+sjmcl://launch?id=OFFICIAL_DIR%3A1.20.1&quickPlaySingleplayer=My%20World
+sjmcl://launch?id=OFFICIAL_DIR%3A1.20.1&quickPlayMultiplayer=mc.example.com%3A25565
+sjmcl://launch?id=tbd&playerId=tbd
 ```

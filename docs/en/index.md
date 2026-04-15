@@ -40,6 +40,6 @@ features:
     title: External Service Collaboration
     details: Works with external webpages, applications, and Agent services through deeplinks and MCP services, delivering a range of convenient features and automation capabilities.
   - icon: 🧩
-    title: Open Plugin System
-    details: Supports plugin development to extend the launcher with more interesting and practical features.
+    title: Open Extension System
+    details: Supports extension development to extend the launcher with more interesting and practical features.
 ---
