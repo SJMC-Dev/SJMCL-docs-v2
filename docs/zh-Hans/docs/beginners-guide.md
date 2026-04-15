@@ -10,7 +10,7 @@
 
 你可以在 [Minecraft 官方网站](https://www.minecraft.net/zh-hans/store/minecraft-java-bedrock-edition-pc) 或 [Xbox 商店](https://www.xbox.com/zh-cn/games/store/minecraft-java-bedrock-edition-for-pc/9NXP44L49SHJ) 购买游戏。
 
-完成购买后，在 SJMCL 主界面的顶部菜单点击 **账户**，然后点击右上角的 **添加角色** 登录 **微软角色**，或创建 **离线角色** 和 **第三方认证角色**。
+完成购买后，在 SJMCL 主界面的顶部菜单点击 **账户**，然后点击右上角的 **添加角色** 登录 **微软账户**，或创建 **离线角色** 和 **第三方认证角色**。
 
 你也可以从其他启动器 [导入账户]()。
 
