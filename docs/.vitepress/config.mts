@@ -245,6 +245,10 @@ export default defineConfig({
                   text: "API",
                   link: "/dev/extension/api",
                 },
+                {
+                  text: "脚手架文档",
+                  link: "https://www.npmjs.com/package/create-sjmcl-extension",
+                },
               ],
             },
             {
@@ -364,6 +368,10 @@ export default defineConfig({
                 {
                   text: "API",
                   link: "/en/dev/extension/api",
+                },
+                {
+                  text: "Scaffold Package",
+                  link: "https://www.npmjs.com/package/create-sjmcl-extension",
                 },
               ],
             },

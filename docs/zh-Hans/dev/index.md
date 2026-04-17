@@ -16,6 +16,7 @@
 - [快速开始（使用脚手架）](/dev/extension/quick-start-scaffold)
 - [快速开始（手动编写）](/dev/extension/quick-start)
 - [API](/dev/extension/api)
+- [脚手架文档](https://www.npmjs.com/package/create-sjmcl-extension)
 
 ### 外部集成
 

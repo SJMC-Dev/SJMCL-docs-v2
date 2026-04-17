@@ -16,6 +16,7 @@ This section contains developer documentation for SJMCL itself, including develo
 - [Quick Start (Scaffold)](/en/dev/extension/quick-start-scaffold)
 - [Quick Start (Manual Setup)](/en/dev/extension/quick-start)
 - [API](/en/dev/extension/api)
+- [Scaffold Package](https://www.npmjs.com/package/create-sjmcl-extension)
 
 ### External Integrations
 
