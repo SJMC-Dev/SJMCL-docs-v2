@@ -31,10 +31,10 @@ The scaffold will prompt for these fields:
 - `Project directory`: the project directory, defaulting to `my-sjmcl-extension`
 - `Extension identifier`: the extension identifier, which must follow a namespaced format such as `org.example.hello`
 - `Extension name`: the display name of the extension
-- `Extension description`: a short description
-- `Extension author`: the extension author
-- `Extension version`: the extension version, which must be valid semver
-- `Minimal launcher version`: the minimum launcher version required by the extension
+- `Extension description`: (Optional) a short description
+- `Extension author`: (Optional) the extension author
+- `Extension version`: (Optional) the extension version; if provided, it must be valid semver
+- `Minimal launcher version`: (Optional) the minimum launcher version required by the extension; if provided, it must be valid semver
 - `Frontend entry`: the frontend entry written into `sjmcl.ext.json`, defaulting to `frontend/index.js`
 
 If the target directory already exists and is not empty, the scaffold asks whether it should overwrite it.
@@ -45,6 +45,7 @@ The scaffold creates a buildable extension project. A typical layout looks like 
 
 ```text
 my-extension/
+├─ README.md
 ├─ package.json
 ├─ sjmcl.ext.json
 ├─ tsconfig.json
@@ -53,23 +54,21 @@ my-extension/
 │  └─ bump.mjs
 └─ src/
    ├─ index.ts
-   ├─ runtime.ts
    ├─ widgets/
    │  └─ home-widget.ts
    ├─ pages/
    │  ├─ settings-page.ts
-   │  └─ example-page.ts
+   │  └─ example-page.tsx
    └─ types/
-      └─ sjmcl.ts
+      └─ host.ts
 ```
 
 The template already includes:
 
 - one `homeWidget`
 - one `settingsPage`
-- one example custom page
-- one example standalone page
-- a minimal local type definition set and runtime registration helper
+- one example custom page that can be shown in the main window or in a standalone window; this page uses standard JSX component trees, and the scaffold transforms them at build time into the same extension syntax used by `homeWidget` (`React.createElement`)
+- a minimal local typing set and extension registration entry
 
 `src/index.ts` is the source entry for your project. The actual frontend file bundled into the extension package is generated into `frontend/index.js`, or whatever output path you entered for `frontend.entry`.
 
@@ -106,7 +105,7 @@ The generated `src/index.ts` already registers the extension and wires up severa
 
 - `src/widgets/home-widget.ts`: the home widget
 - `src/pages/settings-page.ts`: the extension settings page
-- `src/pages/example-page.ts`: the custom page and standalone page example
+- `src/pages/example-page.tsx`: the custom page, which can be shown embedded or in a standalone window
 
 If you want the smallest possible starting point, you can remove the contributions you do not need and keep only `homeWidget` or `settingsPage`.
 

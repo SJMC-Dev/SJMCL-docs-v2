@@ -29,10 +29,10 @@ npx create-sjmcl-extension
 - `Project directory`：项目目录，默认是 `my-sjmcl-extension`
 - `Extension identifier`：扩展标识，必须符合 `org.example.hello` 这样的命名空间格式
 - `Extension name`：扩展显示名称
-- `Extension description`：扩展描述
-- `Extension author`：扩展作者
-- `Extension version`：扩展版本，必须是合法语义化版本
-- `Minimal launcher version`：扩展要求的最低启动器版本
+- `Extension description`：（可选）扩展描述
+- `Extension author`：（可选）扩展作者
+- `Extension version`：（可选）扩展版本；如填写，必须是合法语义化版本
+- `Minimal launcher version`：（可选）扩展要求的最低启动器版本；如填写，必须是合法语义化版本
 - `Frontend entry`：最终写入 `sjmcl.ext.json` 的前端入口，默认是 `frontend/index.js`
 
 如果项目目录已经存在且不是空目录，脚手架会先询问你是否覆盖。
@@ -43,6 +43,7 @@ npx create-sjmcl-extension
 
 ```text
 my-extension/
+├─ README.md
 ├─ package.json
 ├─ sjmcl.ext.json
 ├─ tsconfig.json
@@ -51,23 +52,21 @@ my-extension/
 │  └─ bump.mjs
 └─ src/
    ├─ index.ts
-   ├─ runtime.ts
    ├─ widgets/
    │  └─ home-widget.ts
    ├─ pages/
    │  ├─ settings-page.ts
-   │  └─ example-page.ts
+   │  └─ example-page.tsx
    └─ types/
-      └─ sjmcl.ts
+      └─ host.ts
 ```
 
 模板默认已经包含：
 
 - 一个首页卡片 `homeWidget`
 - 一个设置页 `settingsPage`
-- 一个普通自定义页面
-- 一个独立窗口页面示例
-- 一套最小可用的本地类型定义和注册运行时
+- 一个自定义页面，同时可在主窗口内跳转显示或在独立新窗口显示；这个页面使用标准 JSX 语法撰写组件树，脚手架在编译时会转换为和 `homeWidget` 相同的扩展语法（即 `React.createElement`）
+- 一套最小可用的本地类型定义与扩展注册入口
 
 其中 `src/index.ts` 是你的源码入口，真正打包进扩展包的前端文件会由构建脚本生成到 `frontend/index.js` 或你填写的其他入口路径。
 
@@ -104,7 +103,7 @@ npm run bump -- 0.1.1
 
 - `src/widgets/home-widget.ts`：首页卡片
 - `src/pages/settings-page.ts`：扩展设置页
-- `src/pages/example-page.ts`：自定义页面与独立窗口页面
+- `src/pages/example-page.tsx`：自定义页面，可在主窗口内跳转显示，也可在独立新窗口显示
 
 如果你只想先保留一个最小功能，可以删掉不需要的页面贡献，只保留 `homeWidget` 或 `settingsPage`。
 
