@@ -348,6 +348,16 @@ Reloads the extension.
 host.actions.reloadSelf();
 ```
 
+### `updateSelf`
+
+Requests the host to download an updated extension package and prompt for installation.
+
+> Supported since `1.0.0-beta.6`.
+
+```ts
+await host.actions.updateSelf(src: string, newVersion: string);
+```
+
 ## Related Docs
 
 - [Extension System](/en/dev/extension/)

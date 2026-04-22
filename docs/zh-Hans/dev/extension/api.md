@@ -353,3 +353,13 @@ host.actions.logger.info("extension log");
 ```ts
 host.actions.reloadSelf();
 ```
+
+### `updateSelf`
+
+请求宿主下载指定版本的扩展包，并弹出安装更新确认。
+
+> 自 `1.0.0-beta.6` 起支持。
+
+```ts
+await host.actions.updateSelf(src: string, newVersion: string);
+```
