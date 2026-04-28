@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
-import { useData } from 'vitepress'
+import { useData, withBase } from 'vitepress'
 import { VPBadge, VPButton } from 'vitepress/theme'
 import { icons as simpleIcons } from '@iconify-json/simple-icons'
 
@@ -18,6 +18,8 @@ type DownloadButton = {
   label: string
   href: string
   recommended: boolean
+  download: boolean
+  metaIconSvg?: string
 }
 
 type CardData = {
@@ -49,7 +51,7 @@ const isEnglish = computed(() => lang.value === 'en-US')
 const release = computed(() => sharedRelease.value)
 const loadFailed = computed(() => sharedLoadFailed.value)
 
-function iconSvg(name: 'windows' | 'apple' | 'linux') {
+function iconSvg(name: 'windows' | 'apple' | 'linux' | 'archlinux') {
   const icon = simpleIcons.icons[name]
 
   return `<svg viewBox="0 0 ${simpleIcons.width} ${simpleIcons.height}" aria-hidden="true" focusable="false">${icon.body}</svg>`
@@ -83,6 +85,7 @@ const messages = computed(() => {
       appleSilicon: 'Apple Silicon',
       downloadLabel: 'Download',
       historyLinkText: 'View historical versions on GitHub Releases',
+      commandLineInstall: 'Install from Command Line',
       recommended: 'Recommended'
     }
   }
@@ -113,9 +116,14 @@ const messages = computed(() => {
     appleSilicon: 'Apple Silicon',
     downloadLabel: '下载',
     historyLinkText: '在 GitHub Releases 查看历史版本',
+    commandLineInstall: '从命令行安装',
     recommended: '推荐'
   }
 })
+
+const commandLineInstallHref = computed(() => isEnglish.value
+  ? withBase('/en/docs/install.html#install-from-command-line')
+  : withBase('/docs/install.html#%E4%BB%8E%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%AE%89%E8%A3%85'))
 
 function formatSize(size: number) {
   if (size <= 0)
@@ -235,8 +243,19 @@ function createButtons(files: ReleaseFile[]) {
   return sortFiles(files).map((file) => ({
     label: buttonLabel(file),
     href: fileUrl(file.name),
-    recommended: isRecommendedFile(file)
+    recommended: isRecommendedFile(file),
+    download: true
   }))
+}
+
+function createCommandLineInstallButton(): DownloadButton {
+  return {
+    label: messages.value.commandLineInstall,
+    href: commandLineInstallHref.value,
+    recommended: false,
+    download: false,
+    metaIconSvg: iconSvg('archlinux')
+  }
 }
 
 function autoDownloadLabel(file: ReleaseFile) {
@@ -444,7 +463,10 @@ const cards = computed<CardData[]>(() => {
       title: messages.value.linux,
       description: messages.value.linuxDesc,
       iconSvg: iconSvg('linux'),
-      buttons: createButtons(linuxFiles)
+      buttons: [
+        createCommandLineInstallButton(),
+        ...createButtons(linuxFiles)
+      ]
     }
   ]
 })
@@ -515,9 +537,22 @@ onMounted(() => {
               :key="button.href"
               class="downloads-card-button"
               :href="button.href"
-              download
+              :download="button.download ? '' : undefined"
             >
-              {{ button.label }}
+              <span>{{ button.label }}</span>
+              <span
+                v-if="button.metaIconSvg"
+                class="downloads-card-button-separator"
+                aria-hidden="true"
+              >
+                ·
+              </span>
+              <span
+                v-if="button.metaIconSvg"
+                class="downloads-card-button-meta-icon"
+                aria-hidden="true"
+                v-html="button.metaIconSvg"
+              />
               <VPBadge
                 v-if="button.recommended"
                 type="tip"
@@ -692,6 +727,23 @@ onMounted(() => {
   align-items: center;
   margin-left: 0;
   transform: none;
+}
+
+.downloads-card-button-separator {
+  color: inherit;
+}
+
+.downloads-card-button-meta-icon {
+  display: inline-flex;
+  width: 16px;
+  height: 16px;
+  color: #1793d1;
+}
+
+.downloads-card-button-meta-icon :deep(svg) {
+  display: block;
+  width: 16px;
+  height: 16px;
 }
 
 .downloads-card-button:hover {
