@@ -33,6 +33,25 @@ sjmcl://add-auth-server?url=https%3A%2F%2Flittleskin.cn%2Fapi%2Fyggdrasil
 sjmcl://add-auth-server?url=https%3A%2F%2Fexample.com%2Fapi%2Fyggdrasil
 ```
 
+### 在 Blessing-Skin 仪表盘添加“添加到 SJMCL”按钮
+
+需要安装 `Yggdrasil Connect` 或 `Yggdrasil API` 插件。  
+在“管理面板”的“个性化”页面中添加以下 JavaScript 脚本。
+
+```javascript
+var yggBtn = document.getElementById('ygg-dnd-button');
+var button = document.createElement('button');
+button.className = 'btn btn-info ml-2';
+button.textContent = '添加到 SJMCL';
+button.setAttribute(
+  'onclick',
+  'location.href="sjmcl://add-auth-server?url=' +
+  encodeURIComponent(yggBtn.getAttribute('data-clipboard-text')) +
+  '"'
+);
+yggBtn.parentNode.insertBefore(button, yggBtn.nextSibling);
+```
+
 ## `launch`
 
 启动实例，并直接进入启动流程。SJMCL 本身也使用这一端点生成启动实例的桌面快捷方式。
