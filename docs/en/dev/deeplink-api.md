@@ -33,6 +33,25 @@ sjmcl://add-auth-server?url=https%3A%2F%2Flittleskin.cn%2Fapi%2Fyggdrasil
 sjmcl://add-auth-server?url=https%3A%2F%2Fexample.com%2Fapi%2Fyggdrasil
 ```
 
+### Add an "Add to SJMCL" button to the Blessing-Skin dashboard
+
+Install the `Yggdrasil Connect` or `Yggdrasil API` plugin first.
+Add the following JavaScript script on the "Personalize" page in the "Admin Panel".
+
+```javascript
+var yggBtn = document.getElementById('ygg-dnd-button');
+var button = document.createElement('button');
+button.className = 'btn btn-info ml-2';
+button.textContent = 'Add to SJMCL';
+button.setAttribute(
+  'onclick',
+  'location.href="sjmcl://add-auth-server?url=' +
+  encodeURIComponent(yggBtn.getAttribute('data-clipboard-text')) +
+  '"'
+);
+yggBtn.parentNode.insertBefore(button, yggBtn.nextSibling);
+```
+
 ## `launch`
 
 Launches an instance and directly enters the launch flow. SJMCL itself also uses this endpoint to generate desktop shortcuts for launching instances.
