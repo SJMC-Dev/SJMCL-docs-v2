@@ -1,4 +1,4 @@
-import { defineConfig } from "vitepress";
+import { defineConfig, type DefaultTheme } from "vitepress";
 
 const BASE = "/sjmcl/";
 const FAVICON_URL = `${BASE}logo.png`;
@@ -121,7 +121,7 @@ const sharedThemeConfig = {
   siteTitle: false,
   socialLinks: [{ icon: "github", link: "https://github.com/UNIkeEN/SJMCL" }],
   search: localSearch,
-} as const;
+} satisfies DefaultTheme.Config;
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
