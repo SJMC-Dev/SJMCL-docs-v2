@@ -33,9 +33,9 @@ sjmcl://add-auth-server?url=https%3A%2F%2Flittleskin.cn%2Fapi%2Fyggdrasil
 sjmcl://add-auth-server?url=https%3A%2F%2Fexample.com%2Fapi%2Fyggdrasil
 ```
 
-### 在 Blessing-Skin 仪表盘添加“添加到 SJMCL”按钮
+### 在 Blessing-Skin 仪表盘添加 “添加到 SJMCL” 按钮
 
-需要安装 `Yggdrasil Connect` 或 `Yggdrasil API` 插件。  
+需要安装 `Yggdrasil Connect` 或 `Yggdrasil API` 插件。
 在“管理面板”的“个性化”页面中添加以下 JavaScript 脚本。
 
 ```javascript
