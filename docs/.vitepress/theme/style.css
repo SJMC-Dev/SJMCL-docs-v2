@@ -335,6 +335,10 @@ body {
   text-align: center;
 }
 
+.divider
+    display: none;
+}
+
 /* Keep doc aside from overlapping custom layout-bottom footer. */
 @media (min-width: 1280px) {
   .VPDoc .aside-container {
