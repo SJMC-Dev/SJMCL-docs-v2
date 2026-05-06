@@ -123,6 +123,44 @@ const sharedThemeConfig = {
   search: localSearch,
 } satisfies DefaultTheme.Config;
 
+function isChangelogPage(env: unknown) {
+  const pageEnv = env as { relativePath?: unknown; path?: unknown };
+  const relativePath =
+    typeof pageEnv.relativePath === "string"
+      ? pageEnv.relativePath
+      : typeof pageEnv.path === "string"
+        ? pageEnv.path
+        : "";
+
+  return /(^|\/)(zh-Hans\/|en\/)?docs\/changelog\.md$/.test(relativePath);
+}
+
+function renderChangelogGitHubMarks(text: string, escapeHtml: (str: string) => string) {
+  const tokenPattern = /#[0-9]+|@[A-Za-z0-9-]+(?:\[bot\])?/g;
+  let result = "";
+  let lastIndex = 0;
+
+  for (const match of text.matchAll(tokenPattern)) {
+    const token = match[0];
+    const index = match.index ?? 0;
+
+    result += escapeHtml(text.slice(lastIndex, index));
+
+    if (token.startsWith("#")) {
+      const prNumber = token.slice(1);
+      result += `<a class="sjmcl-changelog-ref" href="https://github.com/UNIkeEN/SJMCL/pull/${prNumber}" target="_blank" rel="noreferrer">${escapeHtml(token)}</a>`;
+    } else {
+      const username = token.slice(1).replace(/\[bot\]$/, "");
+      result += `<a class="sjmcl-changelog-ref sjmcl-changelog-mention" href="https://github.com/${username}" target="_blank" rel="noreferrer"><strong>${escapeHtml(token)}</strong></a>`;
+    }
+
+    lastIndex = index + token.length;
+  }
+
+  result += escapeHtml(text.slice(lastIndex));
+  return result;
+}
+
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: "SJMC Launcher",
@@ -138,6 +176,21 @@ export default defineConfig({
   lastUpdated: true,
   rewrites: (id) =>
     id.startsWith("zh-Hans/") ? id.slice("zh-Hans/".length) : id,
+  markdown: {
+    config(md) {
+      const defaultTextRenderer =
+        md.renderer.rules.text ??
+        ((tokens, idx) => md.utils.escapeHtml(tokens[idx].content));
+
+      md.renderer.rules.text = (tokens, idx, options, env, self) => {
+        if (!isChangelogPage(env)) {
+          return defaultTextRenderer(tokens, idx, options, env, self);
+        }
+
+        return renderChangelogGitHubMarks(tokens[idx].content, md.utils.escapeHtml);
+      };
+    },
+  },
   vite: {
     server: {
       proxy: API_PROXY,

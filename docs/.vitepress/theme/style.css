@@ -282,6 +282,14 @@ body {
   text-underline-offset: 0.18em;
 }
 
+.vp-doc a.sjmcl-changelog-ref {
+  font-weight: 500;
+}
+
+.vp-doc a.sjmcl-changelog-mention strong {
+  font-weight: 600;
+}
+
 .dark .vp-doc .custom-block,
 .dark .vp-doc div[class*='language-'] {
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.22);
