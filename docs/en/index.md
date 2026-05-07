@@ -24,7 +24,7 @@ hero:
       text: GitHub
       link: https://github.com/UNIkeEN/SJMCL
 features:
-  - icon: 🪟
+  - icon: 💻
     title: Cross Platform
     details: Supports Windows 10/11, macOS and Linux.
   - icon: 📦

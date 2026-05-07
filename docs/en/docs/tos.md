@@ -1,7 +1,7 @@
 # Terms of Service
 
 > [!NOTE]
-> This document was translated from the Simplified Chinese version using AI.
+> This document was translated from the Simplified Chinese version using AI. In case of any discrepancy between the English version and the Chinese version, the Chinese version shall prevail. 
 
 Updated on: February 1, 2025
 

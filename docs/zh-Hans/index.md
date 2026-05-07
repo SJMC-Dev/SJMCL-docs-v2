@@ -23,7 +23,7 @@ hero:
       text: GitHub
       link: https://github.com/UNIkeEN/SJMCL
 features:
-  - icon: 🪟
+  - icon: 💻
     title: 跨平台支持
     details: 兼容 Windows 10/11、macOS 与 Linux。
   - icon: 📦

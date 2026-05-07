@@ -86,7 +86,9 @@ const messages = computed(() => {
       downloadLabel: 'Download',
       historyLinkText: 'View historical versions on GitHub Releases',
       commandLineInstall: 'Install from Command Line',
-      recommended: 'Recommended'
+      recommended: 'Recommended',
+      bit: '-bit',
+      version: 'Version'
     }
   }
 
@@ -117,7 +119,9 @@ const messages = computed(() => {
     downloadLabel: '下载',
     historyLinkText: '在 GitHub Releases 查看历史版本',
     commandLineInstall: '从命令行安装',
-    recommended: '推荐'
+    recommended: '推荐',
+    bit: '位',
+    version: '版'
   }
 })
 
@@ -262,25 +266,25 @@ function autoDownloadLabel(file: ReleaseFile) {
   const name = file.name.toLowerCase()
 
   if (name.includes('_windows_i686_'))
-    return `${messages.value.downloadLabel} Windows (32位) 版`
+    return `${messages.value.downloadLabel} Windows (32${messages.value.bit}) ${messages.value.version}`
 
   if (name.includes('_windows_x86_64_'))
-    return `${messages.value.downloadLabel} Windows (64位) 版`
+    return `${messages.value.downloadLabel} Windows (64${messages.value.bit}) ${messages.value.version}`
 
   if (name.includes('_windows_aarch64_'))
-    return `${messages.value.downloadLabel} Windows (ARM64) 版`
+    return `${messages.value.downloadLabel} Windows (ARM64) ${messages.value.version}`
 
   if (name.includes('_macos_aarch64.'))
-    return `${messages.value.downloadLabel} macOS (${messages.value.appleSilicon}) 版`
+    return `${messages.value.downloadLabel} macOS (${messages.value.appleSilicon}) ${messages.value.version}`
 
   if (name.includes('_macos_x86_64.'))
-    return `${messages.value.downloadLabel} macOS (${messages.value.intel}) 版`
+    return `${messages.value.downloadLabel} macOS (${messages.value.intel}) ${messages.value.version}`
 
   if (name.includes('_linux_aarch64.'))
-    return `${messages.value.downloadLabel} Linux (ARM64) 版`
+    return `${messages.value.downloadLabel} Linux (ARM64) ${messages.value.version}`
 
   if (name.includes('_linux_x86_64.'))
-    return `${messages.value.downloadLabel} Linux (x86_64) 版`
+    return `${messages.value.downloadLabel} Linux (x86_64) ${messages.value.version}`
 
   return messages.value.unknownDownload
 }

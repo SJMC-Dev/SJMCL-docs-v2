@@ -14,6 +14,9 @@ const partnerAlt = computed(() => isEnglish.value ? 'SJTU Minecraft Club' : '上
 const copyrightText = computed(() => (
   isEnglish.value ? `${currentYear} © SJMCL Team` : `${currentYear} © SJMCL 团队`
 ))
+const disclaimerText = computed(() => (
+  isEnglish.value ? `NOT AN OFFICIAL MINECRAFT SERVICE. NOT APPROVED BY OR ASSOCIATED WITH MOJANG OR MICROSOFT.` : `本软件非 Minecraft 官方产品。未经 Mojang 或 Microsoft 批准，也不与 Mojang 或 Minecraft 关联。`
+))
 </script>
 
 <template>
@@ -54,6 +57,7 @@ const copyrightText = computed(() => (
     <div class="sjmcl-site-footer__meta">
       <p>沪 ICP 备 05052060 号-7</p>
       <p>{{ copyrightText }}</p>
+	  <p>{{ disclaimerText }}</p>
     </div>
   </footer>
 </template>
