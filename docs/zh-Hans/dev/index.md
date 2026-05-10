@@ -21,3 +21,8 @@
 ### 外部集成
 
 - [Deeplink API](/dev/deeplink-api)
+
+### 视觉形象
+
+- [形象简介](/dev/visual-identity/index)
+- [徽标](/dev/visual-identity/icon)
