@@ -313,7 +313,7 @@ export default defineConfig({
               items: [
                 {
                   text: "形象简介",
-                  link: "/dev/visual-identity"
+                  link: "/dev/visual-identity/"
                 },
                 {
                   text: "徽标",
