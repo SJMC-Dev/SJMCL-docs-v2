@@ -308,6 +308,19 @@ export default defineConfig({
               text: "外部集成",
               items: [{ text: "Deeplink API", link: "/dev/deeplink-api" }],
             },
+            {
+              text: "视觉形象",
+              items: [
+                {
+                  text: "形象简介",
+                  link: "/dev/visual-identity/"
+                },
+                {
+                  text: "徽标",
+                  link: "/dev/visual-identity/icon"
+                },
+              ],
+            },
           ],
         },
         docFooter: {
@@ -431,6 +444,19 @@ export default defineConfig({
             {
               text: "External Integrations",
               items: [{ text: "Deeplink API", link: "/en/dev/deeplink-api" }],
+            },
+                          {
+              text: "Visual Identity",
+              items: [
+                {
+                  text: "Overview",
+                  link: "/en/dev/visual-identity"
+                },
+                {
+                  text: "Icons",
+                  link: "/en/dev/visual-identity/icon"
+                },
+              ],
             },
           ],
         },
