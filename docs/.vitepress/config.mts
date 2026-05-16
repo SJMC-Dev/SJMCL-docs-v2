@@ -314,7 +314,7 @@ export default defineConfig({
               text: "视觉形象",
               items: [
                 {
-                  text: "概述",
+                  text: "概览",
                   link: "/dev/visual-identity/"
                 },
                 {

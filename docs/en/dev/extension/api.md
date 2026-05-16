@@ -356,6 +356,16 @@ host.actions.openCustomModal(key: string, params?: any);
 
 `key` must match a modal declared in `customModal` or `customModals`, and can only target the current extension.
 
+### `setHomeWidgetTitle` <Badge type="tip" text="1.1.0" />
+
+Updates a home widget title.
+
+```ts
+host.actions.setHomeWidgetTitle(title: string, key?: string);
+```
+
+If the extension declares multiple home widgets, pass `key` to target a specific one; omit `key` for the single home widget case.
+
 ### `readFile`
 
 Reads a file from the extension `data/` directory.
@@ -479,8 +489,6 @@ host.actions.reloadSelf();
 ### `updateSelf`
 
 Requests the host to download an updated extension package and prompt for installation.
-
-> Supported since `1.0.0-beta.6`.
 
 ```ts
 await host.actions.updateSelf(src: string, newVersion: string);

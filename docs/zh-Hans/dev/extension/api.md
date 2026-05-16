@@ -362,6 +362,16 @@ host.actions.openCustomModal(key: string, params?: any);
 
 这里的 `key` 对应 `customModal` 或 `customModals` 中声明的键，只能打开当前扩展自己的弹窗。
 
+### `setHomeWidgetTitle` <Badge type="tip" text="1.1.0" />
+
+更新首页卡片的标题。
+
+```ts
+host.actions.setHomeWidgetTitle(title: string, key?: string);
+```
+
+若同一扩展声明了多个首页卡片，可通过 `key` 指定目标卡片；省略 `key` 则更新该扩展唯一的首页卡片。
+
 ### `readFile`
 
 读取扩展 `data/` 目录中的文件。
@@ -485,8 +495,6 @@ host.actions.reloadSelf();
 ### `updateSelf`
 
 请求宿主下载指定版本的扩展包，并弹出安装更新确认。
-
-> 自 `1.0.0-beta.6` 起支持。
 
 ```ts
 await host.actions.updateSelf(src: string, newVersion: string);
