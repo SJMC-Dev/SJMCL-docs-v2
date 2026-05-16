@@ -77,6 +77,7 @@ function createBreadcrumbs(relativePath: string, title: string) {
         instance: "Game Instances",
         intelligence: "Intelligence",
         dev: "Developers",
+        "visual-identity": "Visual Identity",
         extension: "Extensions",
         blog: "Blog",
         about: "About",
@@ -86,6 +87,7 @@ function createBreadcrumbs(relativePath: string, title: string) {
         instance: "游戏实例",
         intelligence: "智能",
         dev: "开发者",
+        "visual-identity": "视觉形象",
         extension: "扩展",
         blog: "博客",
         about: "关于",
@@ -312,7 +314,7 @@ export default defineConfig({
               text: "视觉形象",
               items: [
                 {
-                  text: "形象简介",
+                  text: "概述",
                   link: "/dev/visual-identity/"
                 },
                 {
