@@ -8,7 +8,7 @@
 | --- | --- | --- | --- |
 | Windows | Windows 7 及以上 | `aarch64`、`i686`、`x86_64` | 安装器 `.exe`、便携版 `.exe` |
 | macOS | macOS 10.15 及以上 | `aarch64`、`x86_64` | `.app`、`.dmg` |
-| Linux | `webkit2gtk 4.1`（例如 Ubuntu 22.04） | `aarch64`、`x86_64` | `.AppImage`、`.deb`、`.rpm`、便携二进制 |
+| Linux | `webkit2gtk 4.1`（例如 Ubuntu 22.04） | `aarch64`、`x86_64` | `.deb`、`.rpm`、便携二进制 |
 
 > [!TIP]
 > 部分功能可能受运行平台或安装包类型限制。

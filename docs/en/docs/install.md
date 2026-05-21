@@ -8,7 +8,7 @@ You can directly [download from this site](/en/downloads/) to get the latest SJM
 | --- | --- | --- | --- |
 | Windows | Windows 7 or later | `aarch64`, `i686`, `x86_64` | Installer `.exe`, Portable `.exe` |
 | macOS | macOS 10.15 or later | `aarch64`, `x86_64` | `.app`, `.dmg` |
-| Linux | `webkit2gtk 4.1` (for example, Ubuntu 22.04) | `aarch64`, `x86_64` | `.AppImage`, `.deb`, `.rpm`, Portable binary |
+| Linux | `webkit2gtk 4.1` (for example, Ubuntu 22.04) | `aarch64`, `x86_64` | `.deb`, `.rpm`, Portable binary |
 
 > [!TIP]
 > Some features may be limited by platform or package type.
