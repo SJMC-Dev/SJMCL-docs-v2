@@ -37,25 +37,17 @@ winget install SJMC.SJMCL
 > [!WARNING]
 > Winget 的索引仓库是公开协作维护的。安装前建议运行 `winget show SJMC.SJMCL` 查看安装器地址，并确认下载来源来自 `github.com/UNIkeEN/SJMCL` 或 `sjmcl.club`。
 
-如果您需要在 Windows 7 上运行 SJMCL，请仍然参考页面上方的 WebView2 特别提示。
+如果您需要在 Windows 7 上运行 SJMCL，请仍然参考页面上方的 [WebView2 特别提示](#特别提示-适用-windows-7)。
 
-### Homebrew
+### Homebrew（macOS）
 
 SJMCL 提供 macOS Homebrew Cask，Cask 名为 `sjmcl`。
-
-使用以下命令安装：
 
 ```bash
 brew install --cask SJMC-Dev/SJMCL/sjmcl
 ```
 
-之后可以使用以下命令更新：
-
-```bash
-brew upgrade --cask SJMC-Dev/SJMCL/sjmcl
-```
-
-### Linux 安装脚本
+### 安装脚本（Linux）
 
 安装脚本当前仅支持 Linux，会自动识别 `x86_64` 与 `aarch64` 架构，并默认安装最新正式版本。
 
@@ -74,37 +66,6 @@ curl -LsSf https://mc.sjtu.cn/sjmcl/releases/install.sh | sh -s -- --portable
 ```
 
 便携版会安装到 `~/.sjmcl/SJMCL`，并创建 `~/.local/bin/sjmcl` 作为命令入口。该方式不需要 root 权限。
-
-### DEB 包
-
-如果您使用 Debian、Ubuntu、Linux Mint 等 Debian 系发行版，也可以从 [下载页](/downloads/) 或 [GitHub Releases](https://github.com/UNIkeEN/SJMCL/releases) 下载对应架构的 `.deb` 文件后手动安装。
-
-```bash
-sudo apt install ./SJMCL_<version>_linux_<arch>.deb
-```
-
-如果使用较旧的系统，也可以使用 `dpkg` 安装后再修复依赖：
-
-```bash
-sudo dpkg -i ./SJMCL_<version>_linux_<arch>.deb
-sudo apt install -f
-```
-
-### RPM 包
-
-如果您使用 Fedora、RHEL、CentOS Stream、openSUSE 等 RPM 系发行版，可以从 [下载页](/downloads/) 或 [GitHub Releases](https://github.com/UNIkeEN/SJMCL/releases) 下载对应架构的 `.rpm` 文件后手动安装。
-
-Fedora、RHEL、CentOS Stream 等发行版可使用：
-
-```bash
-sudo dnf install ./SJMCL_<version>_linux_<arch>.rpm
-```
-
-openSUSE 可使用：
-
-```bash
-sudo zypper install ./SJMCL_<version>_linux_<arch>.rpm
-```
 
 ### Arch User Repository (AUR)
 

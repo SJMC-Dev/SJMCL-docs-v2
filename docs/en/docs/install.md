@@ -36,25 +36,17 @@ winget install SJMC.SJMCL
 > [!WARNING]
 > The Winget index is publicly maintained. Before installing, consider running `winget show SJMC.SJMCL` to inspect the installer URL, and make sure the download source is from `github.com/UNIkeEN/SJMCL` or `sjmcl.club`.
 
-If you need to run SJMCL on Windows 7, still refer to the WebView2 special note above.
+If you need to run SJMCL on Windows 7, still refer to the [WebView2 special note](#special-note-windows-7) above.
 
-### Homebrew
+### Homebrew (macOS)
 
 SJMCL provides a macOS Homebrew Cask named `sjmcl`.
-
-You can install it directly with the fully qualified Cask name without manually adding the tap first:
 
 ```bash
 brew install --cask SJMC-Dev/SJMCL/sjmcl
 ```
 
-You can update SJMCL with:
-
-```bash
-brew upgrade --cask SJMC-Dev/SJMCL/sjmcl
-```
-
-### Linux Install Script
+### Install Script (Linux)
 
 The install script currently supports Linux only. It detects `x86_64` and `aarch64` automatically and installs the latest stable release by default.
 
@@ -73,37 +65,6 @@ curl -LsSf https://mc.sjtu.cn/sjmcl/releases/install.sh | sh -s -- --portable
 ```
 
 The portable version is installed to `~/.sjmcl/SJMCL`, and the script creates `~/.local/bin/sjmcl` as the command entry. This mode does not require root privileges.
-
-### DEB Package
-
-If you use a Debian-based distribution such as Debian, Ubuntu, or Linux Mint, you can also download the `.deb` file for your architecture from the [download page](/en/downloads/) or [GitHub Releases](https://github.com/UNIkeEN/SJMCL/releases), then install it manually.
-
-```bash
-sudo apt install ./SJMCL_<version>_linux_<arch>.deb
-```
-
-Here `<arch>` is usually `x86_64` or `aarch64`. On older systems, you can also install it with `dpkg` and then fix dependencies:
-
-```bash
-sudo dpkg -i ./SJMCL_<version>_linux_<arch>.deb
-sudo apt install -f
-```
-
-### RPM Package
-
-If you use an RPM-based distribution such as Fedora, RHEL, CentOS Stream, or openSUSE, you can download the `.rpm` file for your architecture from the [download page](/en/downloads/) or [GitHub Releases](https://github.com/UNIkeEN/SJMCL/releases), then install it manually.
-
-For Fedora, RHEL, CentOS Stream, and similar distributions, use:
-
-```bash
-sudo dnf install ./SJMCL_<version>_linux_<arch>.rpm
-```
-
-For openSUSE, use:
-
-```bash
-sudo zypper install ./SJMCL_<version>_linux_<arch>.rpm
-```
 
 ### Arch User Repository (AUR)
 
