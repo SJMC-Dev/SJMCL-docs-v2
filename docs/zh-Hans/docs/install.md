@@ -22,9 +22,56 @@
 
 ## 从命令行安装
 
+<InstallCommandTabs />
+
+### Winget
+
+SJMCL 提供 Windows Package Manager 包，包 ID 为 `SJMC.SJMCL`。
+
+该方式适用于 Windows 10/11：
+
+```powershell
+winget install SJMC.SJMCL
+```
+
+> [!WARNING]
+> Winget 的索引仓库是公开协作维护的。安装前建议运行 `winget show SJMC.SJMCL` 查看安装器地址，并确认下载来源来自 `github.com/UNIkeEN/SJMCL` 或 `sjmcl.club`。
+
+如果您需要在 Windows 7 上运行 SJMCL，请仍然参考页面上方的 [WebView2 特别提示](#特别提示-适用-windows-7)。
+
+### Homebrew（macOS）
+
+SJMCL 提供 macOS Homebrew Cask，Cask 名为 `sjmcl`。
+
+```bash
+brew install --cask SJMC-Dev/SJMCL/sjmcl
+```
+
+### 安装脚本（Linux）
+
+安装脚本当前仅支持 Linux，会自动识别 `x86_64` 与 `aarch64` 架构，并默认安装最新正式版本。
+
+页面上方的命令默认指定 SJMC 源下载，适合中国大陆网络环境：
+
+```bash
+curl -LsSf https://mc.sjtu.cn/sjmcl/releases/install.sh | sh -s -- --source sjmc
+```
+
+如果不指定 `--source` 参数，脚本会使用自动选择安装源。
+
+如果不希望通过系统包管理器安装，也可以安装用户级便携版：
+
+```bash
+curl -LsSf https://mc.sjtu.cn/sjmcl/releases/install.sh | sh -s -- --portable
+```
+
+便携版会安装到 `~/.sjmcl/SJMCL`，并创建 `~/.local/bin/sjmcl` 作为命令入口。该方式不需要 root 权限。
+
 ### Arch User Repository (AUR)
 
 SJMCL 已发布到 Arch User Repository (AUR)，包名：`sjmcl-bin`。
+
+该方式适用于 Arch Linux 及其衍生发行版。
 
 使用常见 AUR Helper（如 `yay`）安装：
 
@@ -39,6 +86,22 @@ git clone https://aur.archlinux.org/sjmcl-bin.git
 cd sjmcl-bin
 makepkg -si
 ```
+
+### Snap
+
+SJMCL 已发布到 Snap Store，包名：`sjmcl`。
+
+该方式适合已经启用 Snap Store 的 Linux 发行版：
+
+```bash
+sudo snap install sjmcl
+```
+
+> [!NOTE]
+> 由于 Snap 的沙盒机制，SJMCL 的部分功能可能无法正常工作。如果遇到异常，欢迎在 [GitHub Issues](https://github.com/UNIkeEN/SJMCL/issues) 反馈，并尽量附上日志、截图和复现步骤等信息。
+
+> [!WARNING]
+> 使用 Snap 安装时，游戏数据可能会默认存放在沙盒目录内。卸载启动器前，请及时备份存档、资源包、模组等重要数据。
 
 ## 常见问题
 

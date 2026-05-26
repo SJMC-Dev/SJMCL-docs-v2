@@ -14,6 +14,7 @@ import Confetti from './Confetti.vue'
 import DownloadsPage from './DownloadsPage.vue'
 import HeroBackground from './Layout.vue'
 import HomeHeroImage from './HomeHeroImage.vue'
+import InstallCommandTabs from './InstallCommandTabs.vue'
 import NavTitle from './NavTitle.vue'
 import SiteFooter from './SiteFooter.vue'
 import './style.css'
@@ -41,6 +42,8 @@ const theme: Theme = {
     })
   },
   enhanceApp({ app }) {
+    app.component('InstallCommandTabs', InstallCommandTabs)
+
     app.use(NolebaseEnhancedReadabilitiesPlugin, {
       spotlight: {
         hoverBlockColor: 'rgb(43 108 176 / 12%)'
