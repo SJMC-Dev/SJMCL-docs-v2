@@ -133,12 +133,14 @@ const platforms = computed<Platform[]>(() => {
 
 const currentPlatform = computed(() => platforms.value.find((platform) => platform.key === activePlatform.value) ?? platforms.value[0])
 const currentMethod = computed(() => currentPlatform.value.methods.find((method) => method.key === activeMethod.value) ?? currentPlatform.value.methods[0])
+const currentLanguageLabel = computed(() => currentMethod.value.language === 'powershell' ? 'powershell' : 'bash')
 
 watch(currentPlatform, (platform) => {
   if (!platform.methods.some((method) => method.key === activeMethod.value)) {
     activeMethod.value = platform.methods[0].key
   }
 })
+
 </script>
 
 <template>
@@ -183,7 +185,16 @@ watch(currentPlatform, (platform) => {
     </div>
 
     <div class="install-command-panel">
-      <pre :class="`language-${currentMethod.language}`"><code>{{ currentMethod.command }}</code></pre>
+      <div class="install-command-code vp-adaptive-theme" :class="`language-${currentMethod.language}`">
+        <button
+          type="button"
+          class="copy"
+          :title="isEnglish ? 'Copy Code' : '复制代码'"
+          :aria-label="isEnglish ? 'Copy Code' : '复制代码'"
+        />
+        <span class="lang">{{ currentLanguageLabel }}</span>
+        <pre><code>{{ currentMethod.command }}</code></pre>
+      </div>
     </div>
   </section>
 </template>
@@ -258,7 +269,7 @@ watch(currentPlatform, (platform) => {
   margin-top: 18px;
 }
 
-.install-command-panel pre {
+.install-command-code pre {
   margin: 0;
   white-space: pre-wrap;
 }
