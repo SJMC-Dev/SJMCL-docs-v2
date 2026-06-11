@@ -6,7 +6,7 @@ You can directly [download from this site](/en/downloads/) to get the latest SJM
 
 | Platform | System Requirement | Supported Architectures | Available Package / Distribution Formats |
 | --- | --- | --- | --- |
-| Windows | Windows 7 or later | `aarch64`, `i686`, `x86_64` | Installer `.exe`, Portable `.exe` |
+| Windows | Windows 10 or later | `aarch64`, `i686`, `x86_64` | Installer `.exe`, Portable `.exe` |
 | macOS | macOS 10.15 or later | `aarch64`, `x86_64` | `.app`, `.dmg` |
 | Linux | `webkit2gtk 4.1` (for example, Ubuntu 22.04) | `aarch64`, `x86_64` | `.deb`, `.rpm`, Portable binary |
 
@@ -14,10 +14,6 @@ You can directly [download from this site](/en/downloads/) to get the latest SJM
 > Some features may be limited by platform or package type.
 >
 > On Windows, the Portable version is recommended. On macOS, the DMG version is recommended. This gives you full functionality and a workflow closer to typical Minecraft launcher usage.
-
-### Special Note (Windows 7)
-
-If you need to run SJMCL on Windows 7, please [download Microsoft Edge WebView2 Runtime](https://developer.microsoft.com/zh-cn/microsoft-edge/webview2#download) and install it first. The "Evergreen Bootstrapper" is recommended.
 
 ## Install from Command Line
 
@@ -35,8 +31,6 @@ winget install SJMC.SJMCL
 
 > [!WARNING]
 > The Winget index is publicly maintained. Before installing, consider running `winget show SJMC.SJMCL` to inspect the installer URL, and make sure the download source is from `github.com/UNIkeEN/SJMCL` or `sjmcl.club`.
-
-If you need to run SJMCL on Windows 7, still refer to the [WebView2 special note](#special-note-windows-7) above.
 
 ### Homebrew (macOS)
 
