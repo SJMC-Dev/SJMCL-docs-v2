@@ -9,6 +9,7 @@ import {
   type Options as NolebaseEnhancedReadabilitiesOptions
 } from '@nolebase/vitepress-plugin-enhanced-readabilities/client'
 import '@nolebase/vitepress-plugin-enhanced-readabilities/client/style.css'
+import BackgroundGallery from './BackgroundGallery.vue'
 import Breadcrumbs from './Breadcrumbs.vue'
 import Confetti from './Confetti.vue'
 import DownloadsPage from './DownloadsPage.vue'
@@ -42,6 +43,7 @@ const theme: Theme = {
     })
   },
   enhanceApp({ app }) {
+    app.component('BackgroundGallery', BackgroundGallery)
     app.component('InstallCommandTabs', InstallCommandTabs)
 
     app.use(NolebaseEnhancedReadabilitiesPlugin, {
