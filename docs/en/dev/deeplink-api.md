@@ -39,17 +39,19 @@ Install the `Yggdrasil Connect` or `Yggdrasil API` plugin first.
 Add the following JavaScript script on the "Personalize" page in the "Admin Panel".
 
 ```javascript
-var yggBtn = document.getElementById('ygg-dnd-button');
-var button = document.createElement('button');
-button.className = 'btn btn-info ml-2';
-button.textContent = 'Add to SJMCL';
-button.setAttribute(
-  'onclick',
-  'location.href="sjmcl://add-auth-server?url=' +
-  encodeURIComponent(yggBtn.getAttribute('data-clipboard-text')) +
-  '"'
-);
-yggBtn.parentNode.insertBefore(button, yggBtn.nextSibling);
+const yggBtn = document.getElementById('ygg-dnd-button');
+if (yggBtn) {
+  const SJMCLBtn = document.createElement('button');
+  SJMCLBtn.className = 'btn btn-info ml-2';
+  SJMCLBtn.textContent = 'Add to SJMCL';
+  SJMCLBtn.setAttribute(
+    'onclick',
+    'location.href="sjmcl://add-auth-server?url=' +
+    encodeURIComponent(yggBtn.getAttribute('data-clipboard-text')) +
+    '"'
+  );
+  yggBtn.parentNode.insertBefore(SJMCLBtn, yggBtn.nextSibling);
+}
 ```
 
 ## `launch`
