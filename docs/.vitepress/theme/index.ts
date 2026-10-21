@@ -9,6 +9,7 @@ import {
   type Options as NolebaseEnhancedReadabilitiesOptions
 } from '@nolebase/vitepress-plugin-enhanced-readabilities/client'
 import '@nolebase/vitepress-plugin-enhanced-readabilities/client/style.css'
+import AnnouncementBanner from './AnnouncementBanner.vue'
 import BackgroundGallery from './BackgroundGallery.vue'
 import Breadcrumbs from './Breadcrumbs.vue'
 import Confetti from './Confetti.vue'
@@ -27,7 +28,11 @@ const theme: Theme = {
     const isDownloadsPage = computed(() => frontmatter.value.pageClass === 'downloads-page')
 
     return h(DefaultTheme.Layout, null, {
-      'home-hero-before': () => [h(HeroBackground), !isDownloadsPage.value ? h(Confetti) : null],
+      'home-hero-before': () => [
+        h(HeroBackground),
+        h(AnnouncementBanner),
+        !isDownloadsPage.value ? h(Confetti) : null
+      ],
       'home-hero-image': () => h(HomeHeroImage),
       ...(isDownloadsPage.value
         ? {

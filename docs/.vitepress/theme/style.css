@@ -314,6 +314,11 @@ body {
   stroke: #555 !important;
 }
 
+/* Keep the hero background and announcement below the fixed navigation. */
+.VPContent.is-home {
+  isolation: isolate;
+}
+
 .downloads-page .VPHomeHero {
   padding-top: 100px;
 }
