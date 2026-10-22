@@ -21,3 +21,8 @@ This section contains developer documentation for SJMCL itself, including develo
 ### External Integrations
 
 - [Deeplink API](/en/dev/deeplink-api)
+
+### Visual Identity
+
+- [Overview](/en/dev/visual-identity/index)
+- [Icons](/en/dev/visual-identity/icon)

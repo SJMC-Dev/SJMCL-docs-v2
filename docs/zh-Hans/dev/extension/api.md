@@ -95,6 +95,78 @@ const token = document.currentScript?.dataset?.extensionToken || "";
 
 多个扩展页面，类型为 `page[]`。
 
+### `customModal`
+
+单个扩展自定义弹窗。宿主会用 Chakra UI 的 `Modal` 承载它，并把组件渲染在 `ModalBody` 中。
+
+| 字段 | 类型 | 必需 | 说明 |
+| --- | --- | --- | --- |
+| `key` | `string` | 是 | 弹窗唯一键，仅在当前扩展内生效；不能为空，且不能包含 `:` |
+| `title` | `string` | 是 | 弹窗标题 |
+| `Component` | `React.ComponentType<{ params?: any; close: () => void; }>` | 是 | 弹窗内容组件 |
+| `params` | `any` | 否 | 默认参数；调用 `openCustomModal` 时可覆盖 |
+| 其他字段 | `Omit<ModalProps, "children" \| "isOpen">` | 否 | 透传给 Chakra UI `Modal` 的属性，例如 `size`、`closeOnOverlayClick`、`motionPreset` |
+
+组件会收到：
+
+```ts
+{
+  params?: any;
+  close: () => void;
+}
+```
+
+### `customModals`
+
+多个扩展自定义弹窗，类型为 `customModal[]`。
+
+### `slots`
+
+向宿主预留的 UI 插槽注册操作项。当前插槽全部用于实例详情页的条目菜单扩展。
+
+基础结构：
+
+```ts
+slots: {
+  [slotKey]: {
+    getItems: (context) => Array<{
+      icon: string | IconType;
+      label?: string;
+      onClick?: MouseEventHandler<HTMLButtonElement>;
+      danger?: boolean;
+    }>;
+  };
+}
+```
+
+说明：
+
+- 仅已定义的插槽键会被宿主接收，未知键会被忽略。
+- `getItems(context)` 返回当前上下文下要追加的按钮项数组。
+- `icon` 可以是图标资源字符串，也可以是 `react-icons` 的 `IconType`。
+- `danger` 为 `true` 时，宿主会按危险操作样式渲染。
+
+当前支持的插槽键与上下文如下：
+
+| 插槽键 | `context` 额外字段 |
+| --- | --- |
+| `ui.instance.world.item_menu_operations` | `save: WorldInfo` |
+| `ui.instance.server.item_menu_operations` | `server: GameServerInfo` |
+| `ui.instance.mod.item_menu_operations` | `mod: LocalModInfo` |
+| `ui.instance.resourcepack.item_menu_operations` | `pack: ResourcePackInfo` |
+| `ui.instance.server_resourcepack.item_menu_operations` | `pack: ResourcePackInfo` |
+| `ui.instance.schematic.item_menu_operations` | `schematic: SchematicInfo` |
+| `ui.instance.shaderpack.item_menu_operations` | `pack: ShaderPackInfo` |
+
+所有插槽上下文都包含这一组基础字段：
+
+```ts
+{
+  instanceId: string | undefined;
+  summary: InstanceSummary | undefined;
+}
+```
+
 ### `dispose`
 
 扩展停用时调用的清理函数。
@@ -248,6 +320,14 @@ host.actions.updateConfig(path: string, value: any);
 await host.actions.navigate(route: string);
 ```
 
+### `navBack`
+
+请求宿主执行一次历史返回。
+
+```ts
+host.actions.navBack();
+```
+
 ### `openWindow`
 
 打开独立窗口并加载指定路由。
@@ -272,21 +352,52 @@ await host.actions.openExternalLink(url: string);
 host.actions.openSharedModal(key: string, params?: any);
 ```
 
-### `readFile`
+### `openCustomModal`
 
-读取扩展 `data/` 目录中的 UTF-8 文本文件。
+打开当前扩展注册的自定义弹窗。
 
 ```ts
-const content = await host.actions.readFile(path: string);
+host.actions.openCustomModal(key: string, params?: any);
 ```
+
+这里的 `key` 对应 `customModal` 或 `customModals` 中声明的键，只能打开当前扩展自己的弹窗。
+
+### `setHomeWidgetTitle` <Badge type="tip" text="1.1.0" />
+
+更新首页卡片的标题。
+
+```ts
+host.actions.setHomeWidgetTitle(title: string, key?: string);
+```
+
+若同一扩展声明了多个首页卡片，可通过 `key` 指定目标卡片；省略 `key` 则更新该扩展唯一的首页卡片。
+
+### `readFile`
+
+读取扩展 `data/` 目录中的文件。
+
+```ts
+const content = await host.actions.readFile(
+  path: string,
+  mode?: "string" | "base64"
+);
+```
+
+默认以 `"string"` 读取；当需要处理二进制内容时，可以使用 `"base64"`。
 
 ### `writeFile`
 
-将文本内容写入扩展 `data/` 目录中的文件。
+将内容写入扩展 `data/` 目录中的文件。
 
 ```ts
-await host.actions.writeFile(path: string, content: string);
+await host.actions.writeFile(
+  path: string,
+  content: string,
+  mode?: "string" | "base64"
+);
 ```
+
+默认以 `"string"` 写入；写入二进制内容时可配合 `"base64"` 模式使用。
 
 ### `deleteFile`
 
@@ -338,6 +449,33 @@ const result = await host.actions.invoke<T = unknown>(
 );
 ```
 
+#### 示例
+
+获取当前选中实例的 ID，并读取该实例根目录下的 `options.txt`：
+
+```js
+const host = api.getHostContext();
+const hostData = api.useHostData();
+
+async function readSelectedInstanceOptions() {
+  const instanceId = hostData.selectedInstance?.id;
+  if (!instanceId) {
+    throw new Error("No selected instance");
+  }
+
+  const optionsText = await host.actions.invoke("read_instance_file", {
+    instanceId,
+    dirType: "Root",
+    path: "options.txt",
+    mode: "string",
+  });
+
+  return optionsText;
+}
+```
+
+这里的 `dirType: "Root"` 对应实例根目录；如果要读取 `mods`、`resourcepacks` 等目录，需要传入对应的 `InstanceSubdirType` 值。
+
 ### `logger`
 
 访问宿主日志模块。
@@ -357,8 +495,6 @@ host.actions.reloadSelf();
 ### `updateSelf`
 
 请求宿主下载指定版本的扩展包，并弹出安装更新确认。
-
-> 自 `1.0.0-beta.6` 起支持。
 
 ```ts
 await host.actions.updateSelf(src: string, newVersion: string);

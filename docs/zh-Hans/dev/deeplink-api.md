@@ -39,17 +39,19 @@ sjmcl://add-auth-server?url=https%3A%2F%2Fexample.com%2Fapi%2Fyggdrasil
 在“管理面板”的“个性化”页面中添加以下 JavaScript 脚本。
 
 ```javascript
-var yggBtn = document.getElementById('ygg-dnd-button');
-var button = document.createElement('button');
-button.className = 'btn btn-info ml-2';
-button.textContent = '添加到 SJMCL';
-button.setAttribute(
-  'onclick',
-  'location.href="sjmcl://add-auth-server?url=' +
-  encodeURIComponent(yggBtn.getAttribute('data-clipboard-text')) +
-  '"'
-);
-yggBtn.parentNode.insertBefore(button, yggBtn.nextSibling);
+const yggBtn = document.getElementById('ygg-dnd-button');
+if (yggBtn) {
+  const SJMCLBtn = document.createElement('button');
+  SJMCLBtn.className = 'btn btn-info ml-2';
+  SJMCLBtn.textContent = '添加到 SJMCL';
+  SJMCLBtn.setAttribute(
+    'onclick',
+    'location.href="sjmcl://add-auth-server?url=' +
+    encodeURIComponent(yggBtn.getAttribute('data-clipboard-text')) +
+    '"'
+  );
+  yggBtn.parentNode.insertBefore(SJMCLBtn, yggBtn.nextSibling);
+}
 ```
 
 ## `launch`

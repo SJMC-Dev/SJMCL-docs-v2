@@ -9,11 +9,14 @@ import {
   type Options as NolebaseEnhancedReadabilitiesOptions
 } from '@nolebase/vitepress-plugin-enhanced-readabilities/client'
 import '@nolebase/vitepress-plugin-enhanced-readabilities/client/style.css'
+import AnnouncementBanner from './AnnouncementBanner.vue'
+import BackgroundGallery from './BackgroundGallery.vue'
 import Breadcrumbs from './Breadcrumbs.vue'
 import Confetti from './Confetti.vue'
 import DownloadsPage from './DownloadsPage.vue'
 import HeroBackground from './Layout.vue'
 import HomeHeroImage from './HomeHeroImage.vue'
+import InstallCommandTabs from './InstallCommandTabs.vue'
 import NavTitle from './NavTitle.vue'
 import SiteFooter from './SiteFooter.vue'
 import './style.css'
@@ -25,7 +28,11 @@ const theme: Theme = {
     const isDownloadsPage = computed(() => frontmatter.value.pageClass === 'downloads-page')
 
     return h(DefaultTheme.Layout, null, {
-      'home-hero-before': () => [h(HeroBackground), !isDownloadsPage.value ? h(Confetti) : null],
+      'home-hero-before': () => [
+        h(HeroBackground),
+        h(AnnouncementBanner),
+        !isDownloadsPage.value ? h(Confetti) : null
+      ],
       'home-hero-image': () => h(HomeHeroImage),
       ...(isDownloadsPage.value
         ? {
@@ -41,6 +48,9 @@ const theme: Theme = {
     })
   },
   enhanceApp({ app }) {
+    app.component('BackgroundGallery', BackgroundGallery)
+    app.component('InstallCommandTabs', InstallCommandTabs)
+
     app.use(NolebaseEnhancedReadabilitiesPlugin, {
       spotlight: {
         hoverBlockColor: 'rgb(43 108 176 / 12%)'

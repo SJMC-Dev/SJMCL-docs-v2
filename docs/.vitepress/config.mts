@@ -77,6 +77,7 @@ function createBreadcrumbs(relativePath: string, title: string) {
         instance: "Game Instances",
         intelligence: "Intelligence",
         dev: "Developers",
+        "visual-identity": "Visual Identity",
         extension: "Extensions",
         blog: "Blog",
         about: "About",
@@ -86,6 +87,7 @@ function createBreadcrumbs(relativePath: string, title: string) {
         instance: "游戏实例",
         intelligence: "智能",
         dev: "开发者",
+        "visual-identity": "视觉形象",
         extension: "扩展",
         blog: "博客",
         about: "关于",
@@ -123,6 +125,44 @@ const sharedThemeConfig = {
   search: localSearch,
 } satisfies DefaultTheme.Config;
 
+function isChangelogPage(env: unknown) {
+  const pageEnv = env as { relativePath?: unknown; path?: unknown };
+  const relativePath =
+    typeof pageEnv.relativePath === "string"
+      ? pageEnv.relativePath
+      : typeof pageEnv.path === "string"
+        ? pageEnv.path
+        : "";
+
+  return /(^|\/)(zh-Hans\/|en\/)?docs\/changelog\.md$/.test(relativePath);
+}
+
+function renderChangelogGitHubMarks(text: string, escapeHtml: (str: string) => string) {
+  const tokenPattern = /#[0-9]+|@[A-Za-z0-9-]+(?:\[bot\])?/g;
+  let result = "";
+  let lastIndex = 0;
+
+  for (const match of text.matchAll(tokenPattern)) {
+    const token = match[0];
+    const index = match.index ?? 0;
+
+    result += escapeHtml(text.slice(lastIndex, index));
+
+    if (token.startsWith("#")) {
+      const prNumber = token.slice(1);
+      result += `<a class="sjmcl-changelog-ref" href="https://github.com/UNIkeEN/SJMCL/pull/${prNumber}" target="_blank" rel="noreferrer">${escapeHtml(token)}</a>`;
+    } else {
+      const username = token.slice(1).replace(/\[bot\]$/, "");
+      result += `<a class="sjmcl-changelog-ref sjmcl-changelog-mention" href="https://github.com/${username}" target="_blank" rel="noreferrer"><strong>${escapeHtml(token)}</strong></a>`;
+    }
+
+    lastIndex = index + token.length;
+  }
+
+  result += escapeHtml(text.slice(lastIndex));
+  return result;
+}
+
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   title: "SJMC Launcher",
@@ -138,6 +178,21 @@ export default defineConfig({
   lastUpdated: true,
   rewrites: (id) =>
     id.startsWith("zh-Hans/") ? id.slice("zh-Hans/".length) : id,
+  markdown: {
+    config(md) {
+      const defaultTextRenderer =
+        md.renderer.rules.text ??
+        ((tokens, idx) => md.utils.escapeHtml(tokens[idx].content));
+
+      md.renderer.rules.text = (tokens, idx, options, env, self) => {
+        if (!isChangelogPage(env)) {
+          return defaultTextRenderer(tokens, idx, options, env, self);
+        }
+
+        return renderChangelogGitHubMarks(tokens[idx].content, md.utils.escapeHtml);
+      };
+    },
+  },
   vite: {
     server: {
       proxy: API_PROXY,
@@ -209,6 +264,7 @@ export default defineConfig({
                 },
               ],
             },
+            { text: "背景图库", link: "/docs/background-gallery" },
             { text: "更新日志", link: "/docs/changelog" },
             { text: "用户协议", link: "/docs/tos" },
             { text: "用户社群", link: "/docs/user-group" },
@@ -254,6 +310,19 @@ export default defineConfig({
             {
               text: "外部集成",
               items: [{ text: "Deeplink API", link: "/dev/deeplink-api" }],
+            },
+            {
+              text: "视觉形象",
+              items: [
+                {
+                  text: "概览",
+                  link: "/dev/visual-identity/"
+                },
+                {
+                  text: "徽标",
+                  link: "/dev/visual-identity/icon"
+                },
+              ],
             },
           ],
         },
@@ -333,6 +402,7 @@ export default defineConfig({
                 },
               ],
             },
+            { text: "Background Gallery", link: "/en/docs/background-gallery" },
             { text: "Changelog", link: "/en/docs/changelog" },
             { text: "Terms of Service", link: "/en/docs/tos" },
             { text: "User Group", link: "/en/docs/user-group" },
@@ -378,6 +448,19 @@ export default defineConfig({
             {
               text: "External Integrations",
               items: [{ text: "Deeplink API", link: "/en/dev/deeplink-api" }],
+            },
+                          {
+              text: "Visual Identity",
+              items: [
+                {
+                  text: "Overview",
+                  link: "/en/dev/visual-identity"
+                },
+                {
+                  text: "Icons",
+                  link: "/en/dev/visual-identity/icon"
+                },
+              ],
             },
           ],
         },

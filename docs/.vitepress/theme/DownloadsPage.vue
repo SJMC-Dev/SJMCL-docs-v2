@@ -20,6 +20,7 @@ type DownloadButton = {
   recommended: boolean
   download: boolean
   metaIconSvg?: string
+  metaIconColor?: string
 }
 
 type CardData = {
@@ -51,7 +52,7 @@ const isEnglish = computed(() => lang.value === 'en-US')
 const release = computed(() => sharedRelease.value)
 const loadFailed = computed(() => sharedLoadFailed.value)
 
-function iconSvg(name: 'windows' | 'apple' | 'linux' | 'archlinux') {
+function iconSvg(name: 'windows' | 'apple' | 'linux' | 'archlinux' | 'homebrew' | 'windowsterminal') {
   const icon = simpleIcons.icons[name]
 
   return `<svg viewBox="0 0 ${simpleIcons.width} ${simpleIcons.height}" aria-hidden="true" focusable="false">${icon.body}</svg>`
@@ -69,7 +70,7 @@ const messages = computed(() => {
       linux: 'Linux',
       windowsDesc: 'Setup and portable builds for x86, x64 and ARM64.',
       macosDesc: 'DMG installers and app bundles for Apple Silicon and Intel.',
-      linuxDesc: 'AppImage, DEB, RPM and portable builds for desktop Linux.',
+      linuxDesc: 'DEB, RPM and portable builds for desktop Linux.',
       unknownDownload: 'Download latest build',
       setup: 'Setup',
       portable: 'Portable',
@@ -86,7 +87,9 @@ const messages = computed(() => {
       downloadLabel: 'Download',
       historyLinkText: 'View historical versions on GitHub Releases',
       commandLineInstall: 'Install from Command Line',
-      recommended: 'Recommended'
+      recommended: 'Recommended',
+      bit: '-bit',
+      version: 'Version'
     }
   }
 
@@ -100,7 +103,7 @@ const messages = computed(() => {
     linux: 'Linux',
     windowsDesc: '提供 x86、x64、ARM64 的安装版与便携版。',
     macosDesc: '提供 Apple Silicon 与 Intel 的 DMG 和 App Bundle。',
-    linuxDesc: '提供 AppImage、DEB、RPM 与便携版。',
+    linuxDesc: '提供 DEB、RPM 与便携版。',
     unknownDownload: '下载最新版本',
     setup: '安装版',
     portable: '便携版',
@@ -117,13 +120,31 @@ const messages = computed(() => {
     downloadLabel: '下载',
     historyLinkText: '在 GitHub Releases 查看历史版本',
     commandLineInstall: '从命令行安装',
-    recommended: '推荐'
+    recommended: '推荐',
+    bit: '位',
+    version: '版'
   }
 })
 
-const commandLineInstallHref = computed(() => isEnglish.value
-  ? withBase('/en/docs/install.html#install-from-command-line')
-  : withBase('/docs/install.html#%E4%BB%8E%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%AE%89%E8%A3%85'))
+const cliInstallAnchors = computed(() => {
+  if (isEnglish.value) {
+    return {
+      windows: 'winget',
+      macos: 'homebrew-macos',
+      linux: 'install-script-linux'
+    }
+  }
+  return {
+    windows: 'winget',
+    macos: 'homebrew-macos',
+    linux: '安装脚本-linux'
+  }
+})
+
+function cliInstallHref(anchor: string) {
+  const base = isEnglish.value ? '/en/docs/install.html' : '/docs/install.html'
+  return withBase(`${base}#${encodeURIComponent(anchor)}`)
+}
 
 function formatSize(size: number) {
   if (size <= 0)
@@ -248,39 +269,47 @@ function createButtons(files: ReleaseFile[]) {
   }))
 }
 
-function createCommandLineInstallButton(): DownloadButton {
+function createCommandLineInstallButton(options?: { metaIconSvg?: string; href?: string; metaIconColor?: string }): DownloadButton {
   return {
     label: messages.value.commandLineInstall,
-    href: commandLineInstallHref.value,
+    href: options?.href || cliInstallHref(cliInstallAnchors.value.linux),
     recommended: false,
     download: false,
-    metaIconSvg: iconSvg('archlinux')
+    metaIconSvg: options?.metaIconSvg || iconSvg('archlinux'),
+    metaIconColor: options?.metaIconColor
   }
+}
+
+function createAurIconGroupHtml(): string {
+  const archSvg = iconSvg('archlinux')
+  const terminalSvg = iconSvg('windowsterminal')
+
+  return `<span class="downloads-icon-group-back" style="color: #1793D1">${archSvg}</span><span class="downloads-icon-group-front" style="color: inherit">${terminalSvg}</span>`
 }
 
 function autoDownloadLabel(file: ReleaseFile) {
   const name = file.name.toLowerCase()
 
   if (name.includes('_windows_i686_'))
-    return `${messages.value.downloadLabel} Windows (32位) 版`
+    return `${messages.value.downloadLabel} Windows (32${messages.value.bit}) ${messages.value.version}`
 
   if (name.includes('_windows_x86_64_'))
-    return `${messages.value.downloadLabel} Windows (64位) 版`
+    return `${messages.value.downloadLabel} Windows (64${messages.value.bit}) ${messages.value.version}`
 
   if (name.includes('_windows_aarch64_'))
-    return `${messages.value.downloadLabel} Windows (ARM64) 版`
+    return `${messages.value.downloadLabel} Windows (ARM64) ${messages.value.version}`
 
   if (name.includes('_macos_aarch64.'))
-    return `${messages.value.downloadLabel} macOS (${messages.value.appleSilicon}) 版`
+    return `${messages.value.downloadLabel} macOS (${messages.value.appleSilicon}) ${messages.value.version}`
 
   if (name.includes('_macos_x86_64.'))
-    return `${messages.value.downloadLabel} macOS (${messages.value.intel}) 版`
+    return `${messages.value.downloadLabel} macOS (${messages.value.intel}) ${messages.value.version}`
 
   if (name.includes('_linux_aarch64.'))
-    return `${messages.value.downloadLabel} Linux (ARM64) 版`
+    return `${messages.value.downloadLabel} Linux (ARM64) ${messages.value.version}`
 
   if (name.includes('_linux_x86_64.'))
-    return `${messages.value.downloadLabel} Linux (x86_64) 版`
+    return `${messages.value.downloadLabel} Linux (x86_64) ${messages.value.version}`
 
   return messages.value.unknownDownload
 }
@@ -449,14 +478,27 @@ const cards = computed<CardData[]>(() => {
       title: messages.value.windows,
       description: messages.value.windowsDesc,
       iconSvg: iconSvg('windows'),
-      buttons: createButtons(windowsFiles)
+      buttons: [
+        createCommandLineInstallButton({
+          metaIconSvg: iconSvg('windowsterminal'),
+          href: cliInstallHref(cliInstallAnchors.value.windows),
+        }),
+        ...createButtons(windowsFiles)
+      ]
     },
     {
       key: 'macos',
       title: messages.value.macos,
       description: messages.value.macosDesc,
       iconSvg: iconSvg('apple'),
-      buttons: createButtons(macosFiles)
+      buttons: [
+        createCommandLineInstallButton({
+          metaIconSvg: iconSvg('homebrew'),
+          href: cliInstallHref(cliInstallAnchors.value.macos),
+          metaIconColor: '#FBB040',
+        }),
+        ...createButtons(macosFiles)
+      ]
     },
     {
       key: 'linux',
@@ -464,7 +506,10 @@ const cards = computed<CardData[]>(() => {
       description: messages.value.linuxDesc,
       iconSvg: iconSvg('linux'),
       buttons: [
-        createCommandLineInstallButton(),
+        createCommandLineInstallButton({
+          metaIconSvg: createAurIconGroupHtml(),
+          href: cliInstallHref(cliInstallAnchors.value.linux),
+        }),
         ...createButtons(linuxFiles)
       ]
     }
@@ -551,6 +596,7 @@ onMounted(() => {
                 v-if="button.metaIconSvg"
                 class="downloads-card-button-meta-icon"
                 aria-hidden="true"
+                :style="button.metaIconColor ? { color: button.metaIconColor } : undefined"
                 v-html="button.metaIconSvg"
               />
               <VPBadge
@@ -735,15 +781,38 @@ onMounted(() => {
 
 .downloads-card-button-meta-icon {
   display: inline-flex;
+  position: relative;
   width: 16px;
   height: 16px;
-  color: #1793d1;
 }
 
 .downloads-card-button-meta-icon :deep(svg) {
   display: block;
   width: 16px;
   height: 16px;
+}
+
+.downloads-card-button-meta-icon :deep(.downloads-icon-group-back svg) {
+  width: 14px;
+  height: 14px;
+}
+
+.downloads-card-button-meta-icon :deep(.downloads-icon-group-front) {
+  position: absolute;
+  bottom: -2px;
+  right: -3px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 12px;
+  height: 12px;
+  background: var(--vp-c-bg-soft);
+  border-radius: 2px;
+}
+
+.downloads-card-button-meta-icon :deep(.downloads-icon-group-front svg) {
+  width: 10px;
+  height: 10px;
 }
 
 .downloads-card-button:hover {

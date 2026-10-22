@@ -95,6 +95,78 @@ Standalone route:
 
 Multiple extension pages, typed as `page[]`.
 
+### `customModal`
+
+Single extension-defined modal. The host renders it inside a Chakra UI `Modal`, with the component mounted in `ModalBody`.
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| `key` | `string` | yes | unique modal key within the current extension; must be non-empty and must not contain `:` |
+| `title` | `string` | yes | modal title |
+| `Component` | `React.ComponentType<{ params?: any; close: () => void; }>` | yes | modal content component |
+| `params` | `any` | no | default params; can be overridden by `openCustomModal` |
+| other fields | `Omit<ModalProps, "children" \| "isOpen">` | no | props forwarded to Chakra UI `Modal`, such as `size`, `closeOnOverlayClick`, and `motionPreset` |
+
+The component receives:
+
+```ts
+{
+  params?: any;
+  close: () => void;
+}
+```
+
+### `customModals`
+
+Multiple extension-defined modals, typed as `customModal[]`.
+
+### `slots`
+
+Registers action items into host-provided UI slots. All current slots extend item menus on instance detail pages.
+
+Base shape:
+
+```ts
+slots: {
+  [slotKey]: {
+    getItems: (context) => Array<{
+      icon: string | IconType;
+      label?: string;
+      onClick?: MouseEventHandler<HTMLButtonElement>;
+      danger?: boolean;
+    }>;
+  };
+}
+```
+
+Notes:
+
+- Only known slot keys are accepted by the host; unknown keys are ignored.
+- `getItems(context)` returns the extra button items for the current context.
+- `icon` may be an icon asset string or a `react-icons` `IconType`.
+- When `danger` is `true`, the host renders the item with danger styling.
+
+Currently supported slot keys and contexts:
+
+| Slot Key | Extra `context` Fields |
+| --- | --- |
+| `ui.instance.world.item_menu_operations` | `save: WorldInfo` |
+| `ui.instance.server.item_menu_operations` | `server: GameServerInfo` |
+| `ui.instance.mod.item_menu_operations` | `mod: LocalModInfo` |
+| `ui.instance.resourcepack.item_menu_operations` | `pack: ResourcePackInfo` |
+| `ui.instance.server_resourcepack.item_menu_operations` | `pack: ResourcePackInfo` |
+| `ui.instance.schematic.item_menu_operations` | `schematic: SchematicInfo` |
+| `ui.instance.shaderpack.item_menu_operations` | `pack: ShaderPackInfo` |
+
+Every slot context also includes this base payload:
+
+```ts
+{
+  instanceId: string | undefined;
+  summary: InstanceSummary | undefined;
+}
+```
+
 ### `dispose`
 
 Cleanup function called during deactivation.
@@ -242,6 +314,14 @@ Navigates within the route scope allowed for the extension.
 await host.actions.navigate(route: string);
 ```
 
+### `navBack`
+
+Requests a single history back navigation from the host.
+
+```ts
+host.actions.navBack();
+```
+
 ### `openWindow`
 
 Opens a standalone window for the given route.
@@ -266,21 +346,52 @@ Opens a shared host modal.
 host.actions.openSharedModal(key: string, params?: any);
 ```
 
-### `readFile`
+### `openCustomModal`
 
-Reads a UTF-8 text file from the extension `data/` directory.
+Opens a custom modal registered by the current extension.
 
 ```ts
-const content = await host.actions.readFile(path: string);
+host.actions.openCustomModal(key: string, params?: any);
 ```
+
+`key` must match a modal declared in `customModal` or `customModals`, and can only target the current extension.
+
+### `setHomeWidgetTitle` <Badge type="tip" text="1.1.0" />
+
+Updates a home widget title.
+
+```ts
+host.actions.setHomeWidgetTitle(title: string, key?: string);
+```
+
+If the extension declares multiple home widgets, pass `key` to target a specific one; omit `key` for the single home widget case.
+
+### `readFile`
+
+Reads a file from the extension `data/` directory.
+
+```ts
+const content = await host.actions.readFile(
+  path: string,
+  mode?: "string" | "base64"
+);
+```
+
+The default mode is `"string"`. Use `"base64"` for binary content.
 
 ### `writeFile`
 
-Writes text content into a file under the extension `data/` directory.
+Writes content into a file under the extension `data/` directory.
 
 ```ts
-await host.actions.writeFile(path: string, content: string);
+await host.actions.writeFile(
+  path: string,
+  content: string,
+  mode?: "string" | "base64"
+);
 ```
+
+The default mode is `"string"`. Use `"base64"` when writing binary content.
 
 ### `deleteFile`
 
@@ -332,6 +443,33 @@ const result = await host.actions.invoke<T = unknown>(
 );
 ```
 
+#### Example
+
+Get the currently selected instance ID and read `options.txt` from that instance root directory:
+
+```js
+const host = api.getHostContext();
+const hostData = api.useHostData();
+
+async function readSelectedInstanceOptions() {
+  const instanceId = hostData.selectedInstance?.id;
+  if (!instanceId) {
+    throw new Error("No selected instance");
+  }
+
+  const optionsText = await host.actions.invoke("read_instance_file", {
+    instanceId,
+    dirType: "Root",
+    path: "options.txt",
+    mode: "string",
+  });
+
+  return optionsText;
+}
+```
+
+`dirType: "Root"` targets the instance root directory. To read from `mods`, `resourcepacks`, and other subdirectories, pass the corresponding `InstanceSubdirType` value.
+
 ### `logger`
 
 Accesses the host logger.
@@ -351,8 +489,6 @@ host.actions.reloadSelf();
 ### `updateSelf`
 
 Requests the host to download an updated extension package and prompt for installation.
-
-> Supported since `1.0.0-beta.6`.
 
 ```ts
 await host.actions.updateSelf(src: string, newVersion: string);
