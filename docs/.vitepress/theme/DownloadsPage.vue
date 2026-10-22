@@ -305,10 +305,10 @@ function autoDownloadLabel(file: ReleaseFile) {
   if (name.includes('_macos_x86_64.'))
     return `${messages.value.downloadLabel} macOS (${messages.value.intel}) ${messages.value.version}`
 
-  if (name.includes('_linux_aarch64.'))
+  if (name.includes('_linux_aarch64'))
     return `${messages.value.downloadLabel} Linux (ARM64) ${messages.value.version}`
 
-  if (name.includes('_linux_x86_64.'))
+  if (name.includes('_linux_x86_64'))
     return `${messages.value.downloadLabel} Linux (x86_64) ${messages.value.version}`
 
   return messages.value.unknownDownload
@@ -397,7 +397,7 @@ function detectAutoDownload(files: ReleaseFile[]) {
   }))
   const fallbackFile = normalized.find(({ name }) => name.includes('windows_x86_64_portable.exe'))?.file
     || normalized.find(({ name }) => name.includes('windows_x86_64_setup.exe'))?.file
-    || normalized.find(({ name }) => name.includes('linux_x86_64.portable'))?.file
+    || normalized.find(({ name }) => name.includes('linux_x86_64_portable'))?.file
     || files[0]
 
   if (typeof navigator === 'undefined')
@@ -417,12 +417,12 @@ function detectAutoDownload(files: ReleaseFile[]) {
 
   if (platform === 'linux') {
     return normalized.find(({ name }) => arch === 'arm64'
-      ? name.includes('linux_aarch64.portable')
-      : name.includes('linux_x86_64.portable'))?.file
+      ? name.includes('linux_aarch64_portable')
+      : name.includes('linux_x86_64_portable'))?.file
       || normalized.find(({ name }) => arch === 'arm64'
         ? name.includes('linux_aarch64.appimage')
         : name.includes('linux_x86_64.appimage'))?.file
-      || normalized.find(({ name }) => name.includes('linux_') && name.includes('.portable'))?.file
+      || normalized.find(({ name }) => name.includes('linux_') && name.endsWith('_portable'))?.file
       || normalized.find(({ name }) => name.includes('linux_') && name.endsWith('.appimage'))?.file
       || fallbackFile
   }
