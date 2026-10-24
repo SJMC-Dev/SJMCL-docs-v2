@@ -44,6 +44,8 @@ const sharedRelease = ref<ReleaseResponse | null>(null)
 const sharedLoadFailed = ref(false)
 const detectedArchitecture = ref('')
 const detectedPlatform = ref('')
+const downloadNotice = ref<HTMLDialogElement | null>(null)
+const showWindowsSmartScreenNote = ref(false)
 
 let sharedLoadPromise: Promise<void> | null = null
 
@@ -89,7 +91,13 @@ const messages = computed(() => {
       commandLineInstall: 'Install from Command Line',
       recommended: 'Recommended',
       bit: '-bit',
-      version: 'Version'
+      version: 'Version',
+      edgeNoticeTitle: 'Download notice',
+      edgeNoticeIntro: 'If Microsoft Edge warns about this download:',
+      edgeNoticeVerify: 'Check that the file name is the one you selected.',
+      edgeNoticeKeep: 'Open Downloads in Edge, select More actions (···) beside the file, then choose Keep and confirm if prompted.',
+      smartScreenNotice: 'If Windows SmartScreen warns when you open the file, verify its source again before choosing More info → Run anyway.',
+      noticeClose: 'Got it'
     }
   }
 
@@ -122,7 +130,13 @@ const messages = computed(() => {
     commandLineInstall: '从命令行安装',
     recommended: '推荐',
     bit: '位',
-    version: '版'
+    version: '版',
+    edgeNoticeTitle: '下载提示',
+    edgeNoticeIntro: '如果 Microsoft Edge 对此次下载显示警告：',
+    edgeNoticeVerify: '先核对文件名是否是你选择的版本。',
+    edgeNoticeKeep: '打开 Edge 的“下载”，点击该文件旁的“···”，选择“保留”，并按提示确认。',
+    smartScreenNotice: '如果打开文件时 Windows SmartScreen 显示警告，请再次核对来源，再选择“更多信息”→“仍要运行”。',
+    noticeClose: '知道了'
   }
 })
 
@@ -348,6 +362,17 @@ function detectArch(source: string, platform: TargetPlatform) {
   return 'unknown' as const
 }
 
+function onDownloadClick(href: string) {
+  if (href === '#' || typeof navigator === 'undefined' || !/\bEdg(?:A|iOS)?\//i.test(navigator.userAgent))
+    return
+
+  const platform = detectPlatform(`${navigator.userAgentData?.platform || ''} ${navigator.platform} ${navigator.userAgent}`.toLowerCase())
+  showWindowsSmartScreenNote.value = platform === 'windows' && href.toLowerCase().includes('_windows_')
+
+  if (downloadNotice.value && !downloadNotice.value.open)
+    downloadNotice.value.showModal()
+}
+
 async function ensureReleaseLoaded() {
   if (!isDownloadsPage.value || sharedRelease.value || sharedLoadFailed.value)
     return
@@ -548,6 +573,7 @@ onMounted(() => {
         theme="brand"
         :text="autoDownload.label"
         :href="autoDownload.href"
+        @click="onDownloadClick(autoDownload.href)"
       />
     </div>
   </div>
@@ -583,6 +609,7 @@ onMounted(() => {
               class="downloads-card-button"
               :href="button.href"
               :download="button.download ? '' : undefined"
+              @click="button.download && onDownloadClick(button.href)"
             >
               <span>{{ button.label }}</span>
               <span
@@ -628,9 +655,98 @@ onMounted(() => {
       </a>
     </p>
   </section>
+  <dialog
+    ref="downloadNotice"
+    class="downloads-notice"
+    :aria-label="messages.edgeNoticeTitle"
+  >
+    <h2 class="downloads-notice-title">
+      {{ messages.edgeNoticeTitle }}
+    </h2>
+    <p class="downloads-notice-intro">
+      {{ messages.edgeNoticeIntro }}
+    </p>
+    <ol class="downloads-notice-steps">
+      <li>{{ messages.edgeNoticeVerify }}</li>
+      <li>{{ messages.edgeNoticeKeep }}</li>
+    </ol>
+    <p
+      v-if="showWindowsSmartScreenNote"
+      class="downloads-notice-windows"
+    >
+      {{ messages.smartScreenNotice }}
+    </p>
+    <button
+      type="button"
+      class="downloads-notice-close"
+      @click="downloadNotice?.close()"
+    >
+      {{ messages.noticeClose }}
+    </button>
+  </dialog>
 </template>
 
 <style scoped>
+.downloads-notice {
+  width: min(480px, calc(100vw - 32px));
+  max-height: calc(100vh - 32px);
+  overflow: auto;
+  padding: 28px;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 16px;
+  color: var(--vp-c-text-1);
+  background: var(--vp-c-bg);
+  box-shadow: var(--vp-shadow-4);
+  text-align: left;
+}
+
+.downloads-notice::backdrop {
+  background: rgb(15 23 42 / 50%);
+}
+
+.downloads-notice-title {
+  margin: 0 0 16px;
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.downloads-notice-intro,
+.downloads-notice-windows {
+  margin: 0 0 12px;
+  line-height: 1.6;
+}
+
+.downloads-notice-steps {
+  margin: 0 0 16px;
+  padding-left: 1.5em;
+  list-style: decimal;
+  line-height: 1.6;
+}
+
+.downloads-notice-steps li + li {
+  margin-top: 8px;
+}
+
+.downloads-notice-windows {
+  padding: 12px;
+  border-radius: 8px;
+  background: var(--vp-c-bg-soft);
+}
+
+.downloads-notice-close {
+  display: block;
+  margin-left: auto;
+  padding: 8px 16px;
+  border-radius: 8px;
+  color: var(--vp-c-white);
+  background: var(--vp-c-brand-1);
+  font-weight: 600;
+}
+
+.downloads-notice-close:hover {
+  background: var(--vp-c-brand-2);
+}
+
 .downloads-hero {
   display: flex;
   flex-direction: column;
