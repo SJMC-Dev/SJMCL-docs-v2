@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
+import { computed, h, onMounted, ref } from 'vue'
 import { useData, withBase } from 'vitepress'
 import { VPBadge, VPButton } from 'vitepress/theme'
 import { icons as simpleIcons } from '@iconify-json/simple-icons'
@@ -87,9 +87,7 @@ const messages = computed(() => {
       appleSilicon: 'Apple Silicon',
       downloadLabel: 'Download',
       historyLinkText: 'View historical versions on GitHub Releases',
-      signingProvidedBy: 'Free Windows code signing provided by',
-      certificateProvidedBy: ', certificate by',
-      signingAttributionEnd: '.',
+      signingAttribution: 'Free Windows code signing provided by {signpath}, certificate by {foundation}.',
       codeSigningPolicy: 'Code signing policy for Windows',
       commandLineInstall: 'Install from Command Line',
       recommended: 'Recommended',
@@ -124,9 +122,7 @@ const messages = computed(() => {
     appleSilicon: 'Apple Silicon',
     downloadLabel: '下载',
     historyLinkText: '在 GitHub Releases 查看历史版本',
-    signingProvidedBy: 'Windows 免费代码签名由',
-    certificateProvidedBy: '提供，证书由',
-    signingAttributionEnd: '提供。',
+    signingAttribution: 'Windows 代码签名由 {signpath} 免费提供，证书由 {foundation} 提供。',
     codeSigningPolicy: 'Windows 代码签名政策（Code signing policy）',
     commandLineInstall: '从命令行安装',
     recommended: '推荐',
@@ -134,6 +130,21 @@ const messages = computed(() => {
     version: '版'
   }
 })
+
+const signingLinks = {
+  '{signpath}': { text: 'SignPath.io', href: 'https://signpath.io' },
+  '{foundation}': { text: 'SignPath Foundation', href: 'https://signpath.org' }
+}
+
+const SigningAttribution = () => messages.value.signingAttribution
+  .split(/(\{signpath\}|\{foundation\})/)
+  .map((part) => {
+    if (part === '{signpath}' || part === '{foundation}') {
+      const link = signingLinks[part]
+      return h('a', { href: link.href, target: '_blank', rel: 'noreferrer' }, link.text)
+    }
+    return part
+  })
 
 const cliInstallAnchors = computed(() => {
   if (isEnglish.value) {
@@ -637,9 +648,7 @@ onMounted(() => {
       </a>
     </p>
     <p class="downloads-signing-note">
-      {{ messages.signingProvidedBy }}
-      <a href="https://signpath.io" target="_blank" rel="noreferrer">SignPath.io</a>{{ messages.certificateProvidedBy }}
-      <a href="https://signpath.org" target="_blank" rel="noreferrer">SignPath Foundation</a>{{ messages.signingAttributionEnd }}
+      <SigningAttribution />
       <a :href="CODE_SIGNING_POLICY_URL" target="_blank" rel="noreferrer">{{ messages.codeSigningPolicy }}</a>
     </p>
   </section>
