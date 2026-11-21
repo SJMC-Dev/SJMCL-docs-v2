@@ -38,6 +38,7 @@ const props = defineProps<{
 const API_URL = 'https://mc.sjtu.cn/api-sjmcl/releases/latest'
 const DOWNLOAD_BASE_URL = 'https://mc.sjtu.cn/sjmcl/releases/'
 const GITHUB_RELEASES_URL = 'https://github.com/UNIkeEN/SJMCL/releases'
+const CODE_SIGNING_POLICY_URL = 'https://github.com/UNIkeEN/SJMCL/blob/main/docs/CODE_SIGNING_POLICY.md'
 
 const { frontmatter, lang } = useData()
 const sharedRelease = ref<ReleaseResponse | null>(null)
@@ -86,6 +87,10 @@ const messages = computed(() => {
       appleSilicon: 'Apple Silicon',
       downloadLabel: 'Download',
       historyLinkText: 'View historical versions on GitHub Releases',
+      signingProvidedBy: 'Free Windows code signing provided by',
+      certificateProvidedBy: ', certificate by',
+      signingAttributionEnd: '.',
+      codeSigningPolicy: 'Code signing policy for Windows',
       commandLineInstall: 'Install from Command Line',
       recommended: 'Recommended',
       bit: '-bit',
@@ -119,6 +124,10 @@ const messages = computed(() => {
     appleSilicon: 'Apple Silicon',
     downloadLabel: '下载',
     historyLinkText: '在 GitHub Releases 查看历史版本',
+    signingProvidedBy: 'Windows 免费代码签名由',
+    certificateProvidedBy: '提供，证书由',
+    signingAttributionEnd: '提供。',
+    codeSigningPolicy: 'Windows 代码签名政策（Code signing policy）',
     commandLineInstall: '从命令行安装',
     recommended: '推荐',
     bit: '位',
@@ -627,6 +636,12 @@ onMounted(() => {
         {{ messages.historyLinkText }}
       </a>
     </p>
+    <p class="downloads-signing-note">
+      {{ messages.signingProvidedBy }}
+      <a href="https://signpath.io" target="_blank" rel="noreferrer">SignPath.io</a>{{ messages.certificateProvidedBy }}
+      <a href="https://signpath.org" target="_blank" rel="noreferrer">SignPath Foundation</a>{{ messages.signingAttributionEnd }}
+      <a :href="CODE_SIGNING_POLICY_URL" target="_blank" rel="noreferrer">{{ messages.codeSigningPolicy }}</a>
+    </p>
   </section>
 </template>
 
@@ -680,14 +695,25 @@ onMounted(() => {
   text-align: center;
 }
 
-.downloads-history-link {
+.downloads-signing-note {
+  margin: 12px auto 0;
+  max-width: 1152px;
+  color: var(--vp-c-text-2);
+  font-size: 13px;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.downloads-history-link,
+.downloads-signing-note a {
   font-size: 13px;
   color: var(--vp-c-text-2);
   text-decoration: underline;
   text-underline-offset: 2px;
 }
 
-.downloads-history-link:hover {
+.downloads-history-link:hover,
+.downloads-signing-note a:hover {
   color: var(--vp-c-brand-1);
 }
 
