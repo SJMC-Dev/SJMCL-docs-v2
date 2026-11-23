@@ -11,6 +11,7 @@ type ReleaseFile = {
 
 type ReleaseResponse = {
   version?: string
+  published_at?: string
   files?: ReleaseFile[]
 }
 
@@ -369,6 +370,7 @@ async function ensureReleaseLoaded() {
         const data = await response.json() as ReleaseResponse
         sharedRelease.value = {
           version: data.version || '',
+          published_at: data.published_at || '',
           files: data.files || []
         }
       })
@@ -448,6 +450,14 @@ function detectAutoDownload(files: ReleaseFile[]) {
 }
 
 const latestVersionText = computed(() => release.value?.version || '...')
+const releaseDateText = computed(() => {
+  const publishedAt = release.value?.published_at
+  if (!publishedAt)
+    return ''
+
+  const date = new Date(publishedAt)
+  return Number.isNaN(date.getTime()) ? '' : date.toISOString().slice(0, 10).replace(/-/g, '.')
+})
 
 const autoDownload = computed(() => {
   const files = release.value?.files || []
@@ -540,6 +550,7 @@ onMounted(() => {
     </h1>
     <p class="downloads-subtitle">
       {{ messages.latestVersion }} {{ latestVersionText }}
+      <template v-if="releaseDateText"> ({{ releaseDateText }})</template>
     </p>
     <div class="downloads-hero-actions">
       <VPButton
