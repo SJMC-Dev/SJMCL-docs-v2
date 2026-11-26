@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
+import { computed, h, onMounted, ref } from 'vue'
 import { useData, withBase } from 'vitepress'
 import { VPBadge, VPButton } from 'vitepress/theme'
 import { icons as simpleIcons } from '@iconify-json/simple-icons'
@@ -39,6 +39,7 @@ const props = defineProps<{
 const API_URL = 'https://mc.sjtu.cn/api-sjmcl/releases/latest'
 const DOWNLOAD_BASE_URL = 'https://mc.sjtu.cn/sjmcl/releases/'
 const GITHUB_RELEASES_URL = 'https://github.com/UNIkeEN/SJMCL/releases'
+const CODE_SIGNING_POLICY_URL = 'https://github.com/UNIkeEN/SJMCL/blob/main/docs/CODE_SIGNING_POLICY.md'
 
 const { frontmatter, lang } = useData()
 const sharedRelease = ref<ReleaseResponse | null>(null)
@@ -87,6 +88,8 @@ const messages = computed(() => {
       appleSilicon: 'Apple Silicon',
       downloadLabel: 'Download',
       historyLinkText: 'View historical versions on GitHub Releases',
+      signingAttribution: 'Free Windows code signing provided by {signpath}, certificate by {foundation}.',
+      codeSigningPolicy: 'Code signing policy for Windows',
       commandLineInstall: 'Install from Command Line',
       recommended: 'Recommended',
       bit: '-bit',
@@ -120,12 +123,29 @@ const messages = computed(() => {
     appleSilicon: 'Apple Silicon',
     downloadLabel: '下载',
     historyLinkText: '在 GitHub Releases 查看历史版本',
+    signingAttribution: 'Windows 代码签名由 {signpath} 免费提供，证书由 {foundation} 提供。',
+    codeSigningPolicy: 'Windows 代码签名政策（Code signing policy）',
     commandLineInstall: '从命令行安装',
     recommended: '推荐',
     bit: '位',
     version: '版'
   }
 })
+
+const signingLinks = {
+  '{signpath}': { text: 'SignPath.io', href: 'https://signpath.io' },
+  '{foundation}': { text: 'SignPath Foundation', href: 'https://signpath.org' }
+}
+
+const SigningAttribution = () => messages.value.signingAttribution
+  .split(/(\{signpath\}|\{foundation\})/)
+  .map((part) => {
+    if (part === '{signpath}' || part === '{foundation}') {
+      const link = signingLinks[part]
+      return h('a', { href: link.href, target: '_blank', rel: 'noreferrer' }, link.text)
+    }
+    return part
+  })
 
 const cliInstallAnchors = computed(() => {
   if (isEnglish.value) {
@@ -638,6 +658,10 @@ onMounted(() => {
         {{ messages.historyLinkText }}
       </a>
     </p>
+    <p class="downloads-signing-note">
+      <SigningAttribution />
+      <a :href="CODE_SIGNING_POLICY_URL" target="_blank" rel="noreferrer">{{ messages.codeSigningPolicy }}</a>
+    </p>
   </section>
 </template>
 
@@ -691,14 +715,25 @@ onMounted(() => {
   text-align: center;
 }
 
-.downloads-history-link {
+.downloads-signing-note {
+  margin: 12px auto 0;
+  max-width: 1152px;
+  color: var(--vp-c-text-2);
+  font-size: 13px;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.downloads-history-link,
+.downloads-signing-note a {
   font-size: 13px;
   color: var(--vp-c-text-2);
   text-decoration: underline;
   text-underline-offset: 2px;
 }
 
-.downloads-history-link:hover {
+.downloads-history-link:hover,
+.downloads-signing-note a:hover {
   color: var(--vp-c-brand-1);
 }
 
